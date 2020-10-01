@@ -1,0 +1,10 @@
+.header {
+    width: 100%;
+    top: 0;
+    padding: 5px;
+    z-index: 100;
+    height: 35px;
+    box-shadow: 0 1px 6px rgba(2, 15, 7, 0.5);
+    font-size: 24px;
+    text-align: left;
+}
