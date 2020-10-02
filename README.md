@@ -7,6 +7,7 @@ Site allowing family and friends to see photos and videos from our wedding.
 - HTML/CSS/JavaScript
 - React/Redux
 - Node.js/Express
+- MySQL
 
 # Packages
 
