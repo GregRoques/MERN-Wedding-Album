@@ -21,11 +21,7 @@ class Login extends Component {
     const { password } = this.state;
     return (
       <div>
-        <form
-          // className={cssLogin.messageGrid}
-          onChange={onChangeHandler}
-          onSubmit={(e) => onSubmitHanlder(e)}
-        >
+        <form onChange={onChangeHandler} onSubmit={(e) => onSubmitHanlder(e)}>
           <input
             className={cssLogin.shortForm}
             type="text"
@@ -33,6 +29,7 @@ class Login extends Component {
             value={password}
             required
           />
+          <div></div>
           <button type="submit" className={cssLogin.submit}>
             SUBMIT
           </button>

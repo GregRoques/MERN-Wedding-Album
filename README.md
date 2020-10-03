@@ -22,6 +22,7 @@ Site allowing family and friends to see photos and videos from our wedding.
 
 - npx i create-react-app
 - npm i react-router-dom
+- npm i react-html-parser
 - npm i swr
 
 **Redux:**
@@ -39,4 +40,4 @@ Site allowing family and friends to see photos and videos from our wedding.
 - npm i helmet
 - npm i cors
 - npm i rand-token
-- npm i bcrypt-nodejs
+- npm i bcrypt

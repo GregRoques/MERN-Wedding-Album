@@ -1,13 +1,24 @@
+form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .shortForm {
     margin: 10px 0px 5px 0px;
     text-indent: 10px;
     font-size: 14px;
-    width: 80%;
+    width: 250px;
     height: 30px;
     border: none;
     border-radius: 5px;
     background-color: rgb(211, 211, 211, 0.75);
     color: black;
+}
+
+.shortForm:focus {
+    outline-color: blue;
 }
 
 input:placeholder-shown,
@@ -16,9 +27,10 @@ textarea:placeholder-shown {
 }
 
 .submit {
-    width: 80%;
+    margin: 1rem 50px;
+    width: 150px;
     height: 25px;
-    background-color: #2677B9;
+    background-color: blue;
     font-size: 16px;
     font-weight: 600px;
     border: 1px solid transparent;
@@ -28,8 +40,8 @@ textarea:placeholder-shown {
 }
 
 .submit:hover {
-    border: 1px solid #2677B9;
-    color: #2677B9;
+    border: 1px solid blue;
+    color: blue;
     background-color: white;
     cursor: pointer;
 }
