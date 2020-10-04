@@ -9,12 +9,12 @@ class App extends Component {
   };
 
   render() {
-    const isLoggedIn = true;
+    const TESTisLoggedIn = true;
 
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={isLoggedIn ? Home : Login} />
+          <Route exact path="/" component={TESTisLoggedIn ? Home : Login} />
           <Route component={this.NoPage} />
         </Switch>
       </div>

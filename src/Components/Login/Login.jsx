@@ -4,6 +4,7 @@ import cssLogin from "./Login.module.css";
 class Login extends Component {
   state = {
     password: "",
+    placeholder: "Password",
   };
 
   onChangeHandler = (e) => {
@@ -14,25 +15,33 @@ class Login extends Component {
 
   onSubmitHanlder = (e) => {
     e.preventDefault();
+    const TESTpassoword = false;
+    if (!TESTpassoword) {
+      this.setState({
+        password: "",
+        placeholder: "INCORRECT PASSWORD",
+      });
+    }
   };
 
   render() {
     const { onChangeHandler, onSubmitHanlder } = this;
-    const { password } = this.state;
+    const { password, placeholder } = this.state;
     return (
       <div>
         <form onChange={onChangeHandler} onSubmit={(e) => onSubmitHanlder(e)}>
           <input
             className={cssLogin.shortForm}
-            type="text"
-            placeholder="Password"
+            type="password"
+            placeholder={placeholder}
             value={password}
             required
           />
-          <div></div>
-          <button type="submit" className={cssLogin.submit}>
-            SUBMIT
-          </button>
+          <div className={cssLogin.buttonContainer}>
+            <button type="submit" className={cssLogin.button}>
+              {placeholder === "Password" ? "SUBMIT" : "Try Again?"}
+            </button>
+          </div>
         </form>
       </div>
     );

@@ -1,4 +1,11 @@
+.homeBody {
+    position: relative;
+    margin: 0;
+    top: 40px;
+}
+
 .header {
+    position: fixed;
     width: 100%;
     top: 0;
     padding: .5rem 0rem .5rem 0rem;
@@ -7,6 +14,8 @@
     box-shadow: 0 1px 6px rgba(2, 15, 7, 0.5);
     font-size: 24px;
     text-align: right;
+    background-color: white;
+    margin-bottom: 2rem;
 }
 
 .header span {
@@ -14,7 +23,6 @@
 }
 
 .header span:hover {
-    color: blue;
     cursor: pointer;
     text-decoration: underline;
 }
@@ -24,5 +32,6 @@
 }
 
 .headerSelected {
-    font-weight: 700
+    font-weight: 700;
+    color: #0cf;
 }

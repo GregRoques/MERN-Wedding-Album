@@ -9,11 +9,11 @@
 
 .gregInsta,
 .rebeccaInsta {
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
     position: relative;
     display: inline-block;
-    margin: 0.5rem;
+    margin: 0.5rem 1rem;
 }
 
 .gregInsta IMG,
@@ -34,4 +34,73 @@
 .gregInsta2,
 .rebeccaInsta2 {
     opacity: 1;
+}
+
+.logOutButton {
+    margin: 1rem 0px 1rem 0px;
+}
+
+
+.button {
+    display: inline-block;
+    padding: .5rem 1rem;
+    border-radius: 10rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: .75rem;
+    letter-spacing: .15rem;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: none;
+}
+
+.button:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0cf;
+    border-radius: 10rem;
+    z-index: -2;
+}
+
+.button:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #008fb3;
+    transition: all .3s;
+    border-radius: 10rem;
+    z-index: -1;
+}
+
+.button:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+.button:hover:before {
+    width: 100%;
+}
+
+* {
+    font-family: Arial;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.button:focus {
+    border: none !important;
+    outline: none !important;
+}
+
+.button:active {
+    transform: scale(.75)
 }
