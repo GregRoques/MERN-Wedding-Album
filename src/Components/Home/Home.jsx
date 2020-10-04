@@ -15,9 +15,13 @@ class Home extends Component {
     });
   };
 
+  wedddingLogout = () => {
+    console.log("logout function will go here");
+  };
+
   render() {
     const { selected } = this.state;
-    const { setView } = this;
+    const { setView, wedddingLogout } = this;
     return (
       <div className={cssHome.homeBody}>
         <div className={cssHome.header}>
@@ -37,7 +41,7 @@ class Home extends Component {
         <div className={cssHome.mainContainer}>
           {selected === "video" ? <Video /> : <Photos />}
         </div>
-        <Footer />
+        <Footer logOut={wedddingLogout} />
       </div>
     );
   }
