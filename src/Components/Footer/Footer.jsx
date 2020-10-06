@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
+import { connect } from "react-redux";
 import cssFooter from "./footer.module.css";
 
-const Footer = ({ logOut }) => {
+const Footer = () => {
+  const { LogOut } = this.props;
   return (
     <div className={cssFooter.footer}>
       <div className={cssFooter.gregInsta}>
@@ -42,11 +44,17 @@ const Footer = ({ logOut }) => {
           />
         </a>
       </div>
-      <div className={cssFooter.logOutButton} onClick={() => logOut()}>
+      <div className={cssFooter.logOutButton} onClick={() => LogOut()}>
         <button className={cssFooter.button}>Log Out</button>
       </div>
     </div>
   );
 };
 
-export default Footer;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    LogOut: () => dispatch(logOut()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Footer);

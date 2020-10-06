@@ -1,19 +1,11 @@
-export const AUTH_SUCCESS = "AUTH_SUCCESS";
-export const AUTH_FAIL = "AUTH_FAIL";
+export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-export const authSuccess = (idToken, userId) => {
+export const logIn = (idToken, userId) => {
   return {
-    type: AUTH_SUCCESS,
+    type: AUTH_LOGIN,
     idToken,
     userId,
-  };
-};
-
-export const authFail = (error) => {
-  return {
-    type: AUTH_FAIL,
-    error,
   };
 };
 
@@ -26,13 +18,13 @@ export const logOut = () => {
 };
 
 export const authCheckState = () => {
+  const lsToken = localStorage.getItem("token");
+  const lsUserId = localStorage.getItem("userId");
   return (dispatch) => {
-    const token = localStorage.getItem("token");
-    if (!token) {
+    if (!lsToken) {
       dispatch(logOut());
     } else {
-      const userId = localStorage.getItem("userId");
-      dispatch(authSuccess(token, userId));
+      dispatch(authLoggedIn(lsToken, lsUserId));
     }
   };
 };

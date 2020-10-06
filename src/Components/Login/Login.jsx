@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import cssLogin from "./Login.module.css";
 
 class Login extends Component {
@@ -9,19 +10,18 @@ class Login extends Component {
 
   onChangeHandler = (e) => {
     let { value } = e.target;
-
     this.setState({ password: value });
   };
 
   onSubmitHanlder = (e) => {
     e.preventDefault();
-    const TESTpassoword = false;
-    if (!TESTpassoword) {
-      this.setState({
-        password: "",
-        placeholder: "INCORRECT PASSWORD",
-      });
-    }
+    // //this.props.LogIn(token, id);
+    // if (!TESTpassoword) {
+    //   this.setState({
+    //     password: "",
+    //     placeholder: "INCORRECT PASSWORD",
+    //   });
+    // }
   };
 
   render() {
@@ -48,4 +48,10 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    LogIn: (password, id) => dispatch(actions.logIn(password, id)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Login);
