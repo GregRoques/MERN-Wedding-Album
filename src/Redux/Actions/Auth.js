@@ -1,11 +1,12 @@
+import axios from "axios";
+import { api } from "../../AxiosOrders";
+
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-export const logIn = (idToken, userId) => {
+export const logIn = (props) => {
   return {
     type: AUTH_LOGIN,
-    idToken,
-    userId,
   };
 };
 
@@ -20,11 +21,25 @@ export const logOut = () => {
 export const authCheckState = () => {
   const lsToken = localStorage.getItem("token");
   const lsUserId = localStorage.getItem("userId");
-  return (dispatch) => {
-    if (!lsToken) {
-      dispatch(logOut());
-    } else {
-      dispatch(authLoggedIn(lsToken, lsUserId));
-    }
-  };
+  if (lsToken && lsUserId) {
+    axios
+      .post(`${api}/isloggedin`, {
+        token: lsToken,
+        id: lsUserId,
+      })
+      .then((res) => {
+        if (res.data === "yes") {
+          return (dispatch) => {
+            dispatch(logIn());
+          };
+        } else {
+          dispatch(logOut());
+        }
+      })
+      .catch(() => {
+        dispatch(logOut());
+      });
+  } else {
+    dispatch(logOut());
+  }
 };

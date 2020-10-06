@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
+import { api } from "../../AxiosOrders";
 import cssLogin from "./Login.module.css";
+import { logIn } from "../../Redux/Actions/Auth";
 
 class Login extends Component {
   state = {
@@ -13,15 +16,36 @@ class Login extends Component {
     this.setState({ password: value });
   };
 
+  isWrongPW = () => {
+    this.setState({
+      password: "",
+      placeholder: "INCORRECT PASSWORD",
+    });
+  };
+
   onSubmitHanlder = (e) => {
     e.preventDefault();
-    // //this.props.LogIn(token, id);
-    // if (!TESTpassoword) {
-    //   this.setState({
-    //     password: "",
-    //     placeholder: "INCORRECT PASSWORD",
-    //   });
-    // }
+    const { LogIn } = this.props;
+    const { password } = this.state;
+    const { isWrongPW } = this;
+
+    axios
+      .post(`${api}/login`, {
+        password,
+      })
+      .then((res) => {
+        const { pw, userName, isCorrectPW } = res.data;
+        if (isCorrectPW === "yes") {
+          LogIn();
+          localStorage.setItem("token", pw);
+          localStorage.setItem("userId", userName);
+        } else {
+          isWrongPW();
+        }
+      })
+      .catch(() => {
+        isWrongPW();
+      });
   };
 
   render() {
@@ -50,7 +74,7 @@ class Login extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    LogIn: (password, id) => dispatch(actions.logIn(password, id)),
+    LogIn: () => dispatch(logIn()),
   };
 };
 

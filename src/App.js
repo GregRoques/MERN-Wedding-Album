@@ -6,7 +6,7 @@ import Login from "./Components/Login/Login";
 
 class App extends Component {
   componentDidMount() {
-    this.props.onTryAutoSignUp();
+    this.props.onTryAutoSignIn();
   }
 
   NoPage = () => {
@@ -14,7 +14,7 @@ class App extends Component {
   };
 
   render() {
-    const isLoggedIn = this.props.userId && this.props.idToken;
+    const { isLoggedIn } = this.props;
     return (
       <div>
         <Switch>
@@ -28,14 +28,13 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.auth.userId,
-    idToken: state.auth.idToken,
+    isLoggedIn: state.auth.isLoggedIn,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTryAutoSignUp: () => dispatch(authCheckState()),
+    onTryAutoSignIn: () => dispatch(authCheckState()),
   };
 };
 

@@ -14,8 +14,8 @@ app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/logIn", logIn);
-app.use("/isLoggedIn", isLoggedIn);
+app.use("/login", logIn);
+app.use("/isloggedin", isLoggedIn);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.get("/*", (req, res) => {
