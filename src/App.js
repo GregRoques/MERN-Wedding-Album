@@ -14,12 +14,11 @@ class App extends Component {
   };
 
   render() {
-    const { isLoggedIn } = this.props;
-
+    const isLoggedIn = this.props.userId && this.props.idToken;
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={TESTisLoggedIn ? Home : Login} />
+          <Route exact path="/" component={isLoggedIn ? Home : Login} />
           <Route component={this.NoPage} />
         </Switch>
       </div>
@@ -27,10 +26,17 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    userId: state.auth.userId,
+    idToken: state.auth.idToken,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onTryAutoSignUp: () => dispatch(authCheckState()),
   };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
