@@ -1,5 +1,6 @@
 import axios from "axios";
-import { api, compId } from "../../AxiosOrders";
+import { api } from "../../Dependencies/AxiosOrders";
+import { compId } from "../../Dependencies/userInfo";
 
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
@@ -24,7 +25,7 @@ export const authCheckState = () => {
     axios
       .post(`${api}/isloggedin`, {
         token: lsToken,
-        id: compId,
+        userId: compId,
       })
       .then((res) => {
         if (res.data === "yes") {

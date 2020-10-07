@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { api } from "../../AxiosOrders";
+import { api } from "../../Dependencies/AxiosOrders";
+import { compId } from "../../Dependencies/userInfo";
 import cssLogin from "./Login.module.css";
-import { logIn, compId } from "../../Redux/Actions/Auth";
+import { logIn } from "../../Redux/Actions/Auth";
 
 class Login extends Component {
   state = {
