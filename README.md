@@ -15,7 +15,8 @@ Site allowing family and friends to see photos and videos from our wedding.
 
 - npm i eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
 - npm i @imaginary-cloud/prettier-config
-  - ./node_modules/.bin/eslint --init **(selected AirBnB style/eslint.json)**
+  - ./node_modules/.bin/eslint --init
+    - **(selected AirBnB style/eslint.json)**
 
 ## Front End
 
