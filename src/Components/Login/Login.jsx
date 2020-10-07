@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { api } from "../../AxiosOrders";
 import cssLogin from "./Login.module.css";
-import { logIn } from "../../Redux/Actions/Auth";
+import { logIn, compId } from "../../Redux/Actions/Auth";
 
 class Login extends Component {
   state = {
@@ -32,6 +32,7 @@ class Login extends Component {
     axios
       .post(`${api}/login`, {
         password,
+        compId,
       })
       .then((res) => {
         const { pw, userName, isCorrectPW } = res.data;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { api } from "../../AxiosOrders";
+import { api, compId } from "../../AxiosOrders";
 
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
@@ -20,12 +20,11 @@ export const logOut = () => {
 
 export const authCheckState = () => {
   const lsToken = localStorage.getItem("token");
-  const lsUserId = localStorage.getItem("userId");
-  if (lsToken && lsUserId) {
+  if (lsToken) {
     axios
       .post(`${api}/isloggedin`, {
         token: lsToken,
-        id: lsUserId,
+        id: compId,
       })
       .then((res) => {
         if (res.data === "yes") {
