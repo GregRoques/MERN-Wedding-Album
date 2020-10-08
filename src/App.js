@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { authCheckState } from "./Redux/Actions/Auth";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 

@@ -19,24 +19,26 @@ export const logOut = () => {
 };
 
 export const authCheckState = () => {
-  const lsToken = localStorage.getItem("token");
-  if (lsToken) {
-    axios
-      .post(`${api}/isloggedin`, {
-        token: lsToken,
-        userId: compId,
-      })
-      .then((res) => {
-        if (res.data === "NO") {
+  return (dispatch) => {
+    const lsToken = localStorage.getItem("token");
+    if (lsToken) {
+      axios
+        .post(`${api}/isloggedin`, {
+          token: lsToken,
+          userId: compId,
+        })
+        .then((res) => {
+          if (res.data === "NO") {
+            dispatch(logOut());
+          } else {
+            dispatch(logIn());
+          }
+        })
+        .catch(() => {
           dispatch(logOut());
-        } else {
-          dispatch(logIn());
-        }
-      })
-      .catch(() => {
-        dispatch(logOut());
-      });
-  } else {
-    dispatch(logOut());
-  }
+        });
+    } else {
+      dispatch(logOut());
+    }
+  };
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { logOut } from "../../Redux/Actions/Auth";
 import cssFooter from "./footer.module.css";
 
 const Footer = () => {

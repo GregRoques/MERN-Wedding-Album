@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import cssLogin from "./Login.module.css";
 import axios from "axios";
 import { api } from "../../Dependencies/AxiosOrders";
 import { compId } from "../../Dependencies/userInfo";
-import cssLogin from "./Login.module.css";
 import { logIn } from "../../Redux/Actions/Auth";
 
 class Login extends Component {
@@ -37,7 +37,7 @@ class Login extends Component {
       })
       .then((res) => {
         const { pw } = res.data;
-        if (isCorrectPW === "NO") {
+        if (pw === "NO") {
           isWrongPW();
         } else {
           LogIn();
