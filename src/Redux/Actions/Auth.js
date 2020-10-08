@@ -5,7 +5,7 @@ import { compId } from "../../Dependencies/userInfo";
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-export const logIn = (props) => {
+export const logIn = () => {
   return {
     type: AUTH_LOGIN,
   };
@@ -13,7 +13,6 @@ export const logIn = (props) => {
 
 export const logOut = () => {
   localStorage.removeItem("token");
-  localStorage.removeItem("userId");
   return {
     type: AUTH_LOGOUT,
   };
@@ -28,12 +27,10 @@ export const authCheckState = () => {
         userId: compId,
       })
       .then((res) => {
-        if (res.data === "yes") {
-          return (dispatch) => {
-            dispatch(logIn());
-          };
-        } else {
+        if (res.data === "NO") {
           dispatch(logOut());
+        } else {
+          dispatch(logIn());
         }
       })
       .catch(() => {

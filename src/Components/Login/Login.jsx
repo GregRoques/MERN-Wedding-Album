@@ -36,14 +36,16 @@ class Login extends Component {
         compId,
       })
       .then((res) => {
-        const { pw, userName, isCorrectPW } = res.data;
-        if (isCorrectPW === "yes") {
+        const { pw } = res.data;
+        if (isCorrectPW === "NO") {
+          isWrongPW();
+        } else {
           LogIn();
           localStorage.setItem("token", pw);
-          localStorage.setItem("userId", userName);
-        } else {
-          isWrongPW();
         }
+        this.setState({
+          password: "",
+        });
       })
       .catch(() => {
         isWrongPW();
