@@ -1,22 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const { databasePassword } = require("../password/password");
+const bcrypt = require("bcrypt");
+const { databasePassword, TEST_isLoggedIn } = require("../util/password");
 
-router
-  .post("/", (req, res, next) => {
-    const { password, compId } = req.body;
-    console.log(compId);
+router.post("/", (req, res, next) => {
+  const { password, compId } = req.body;
 
-    if (password === databasePassword) {
-      res.json("TEST");
+  bcrypt.compare(password, databasePassword, function (err, result) {
+    if (password === result) {
+      res.json(TEST_isLoggedIn);
+      console.log(compId);
     } else {
       res.json("NO");
     }
-  })
-  .catch((err) => {
-    if (err) {
-      throw err;
-    }
   });
+});
+// .catch((err) => {
+//   console.log(err);
+// });
 
 module.exports = router;

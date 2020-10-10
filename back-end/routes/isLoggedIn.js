@@ -1,22 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const { databasePassword } = require("../password/password");
+const { TEST_isLoggedIn } = require("../util/password");
 
-router
-  .post("/", (req, res, next) => {
-    const { password, compId } = req.body;
-    console.log(compId);
+router.post("/", (req, res, next) => {
+  const { password, compId } = req.body;
+  console.log(compId);
 
-    if (password === databasePassword) {
-      res.json("TEST");
-    } else {
-      res.json("NO");
-    }
-  })
-  .catch((err) => {
-    if (err) {
-      throw err;
-    }
-  });
+  if (password === TEST_isLoggedIn) {
+    res.json("TEST");
+  } else {
+    res.json("NO");
+  }
+});
+// .catch((err) => {
+//   console.log(err);
+// });
 
 module.exports = router;
