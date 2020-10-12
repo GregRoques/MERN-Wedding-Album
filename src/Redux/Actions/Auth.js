@@ -34,8 +34,10 @@ export const authCheckState = () => {
             dispatch(logOut());
           }
         })
-        .catch(() => {
-          dispatch(logOut());
+        .catch((err) => {
+          if (err) {
+            dispatch(logOut());
+          }
         });
     } else {
       dispatch(logOut());

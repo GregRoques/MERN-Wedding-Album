@@ -46,8 +46,10 @@ class Login extends Component {
           LogIn();
         }
       })
-      .catch(() => {
-        isWrongPW();
+      .catch(err => {
+        if(err){
+          isWrongPW();
+        }
       });
   };
 
