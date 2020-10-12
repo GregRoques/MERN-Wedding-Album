@@ -3,8 +3,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const helmet = require("helmet");
-const logIn = require("./routes/logIn");
-const isLoggedIn = require("./routes/isLoggedIn");
+const logIn = require("./TEST_routes/logIn");
+const isLoggedIn = require("./TEST_routes/isLoggedIn");
 
 const app = express();
 

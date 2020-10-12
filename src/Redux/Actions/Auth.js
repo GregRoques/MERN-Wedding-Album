@@ -28,10 +28,10 @@ export const authCheckState = () => {
           userId: compId,
         })
         .then((res) => {
-          if (res.data === "NO") {
-            dispatch(logOut());
-          } else {
+          if (res.data === "YES") {
             dispatch(logIn());
+          } else {
+            dispatch(logOut());
           }
         })
         .catch(() => {

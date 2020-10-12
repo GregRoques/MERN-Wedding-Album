@@ -40,12 +40,11 @@ class Login extends Component {
         if (pw === "NO") {
           isWrongPW();
         } else {
+          if(pw !== "save-error"){
+            localStorage.setItem("token", pw)
+          };
           LogIn();
-          localStorage.setItem("token", pw);
         }
-        this.setState({
-          password: "",
-        });
       })
       .catch(() => {
         isWrongPW();
