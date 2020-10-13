@@ -3,14 +3,25 @@ import { connect } from "react-redux";
 import cssLogin from "./Login.module.css";
 import axios from "axios";
 import { api } from "../../Dependencies/AxiosOrders";
-import { compId } from "../../Dependencies/userInfo";
+import { browserName } from "react-device-detect";
 import { logIn } from "../../Redux/Actions/Auth";
 
 class Login extends Component {
   state = {
     password: "",
     placeholder: "Password",
+    ip:""
   };
+
+  componentDidMount(){
+    axios("https://extreme-ip-lookup.com/json/")
+    .then((res) => {
+      const { query } = res.data;
+      this.setState({
+          ip: query
+      })
+    })
+  }
 
   onChangeHandler = (e) => {
     let { value } = e.target;
@@ -27,38 +38,40 @@ class Login extends Component {
   onSubmitHanlder = (e) => {
     e.preventDefault();
     const { LogIn } = this.props;
-    const { password } = this.state;
+    const { password, ip } = this.state;
     const { isWrongPW } = this;
-
+    if(password){
     axios
       .post(`${api}/login`, {
         password,
-        compId,
+        compId: {
+          browserName,
+          ip
+        }
       })
       .then((res) => {
-        const { pw } = res.data;
+        const pw = res.data;
+        console.log(pw)
         if (pw === "NO") {
           isWrongPW();
         } else {
           if(pw !== "save-error"){
-            localStorage.setItem("token", pw)
+            window.localStorage.setItem("GR-Wedding-Token", pw)
           };
           LogIn();
         }
       })
-      .catch(err => {
-        if(err){
+      .catch(() => {
           isWrongPW();
-        }
       });
+    }
   };
 
   render() {
-    const { onChangeHandler, onSubmitHanlder } = this;
     const { password, placeholder } = this.state;
     return (
       <div>
-        <form onChange={onChangeHandler} onSubmit={(e) => onSubmitHanlder(e)}>
+        <form onChange={this.onChangeHandler} onSubmit={(e) => this.onSubmitHanlder(e)}>
           <input
             className={cssLogin.shortForm}
             type="password"

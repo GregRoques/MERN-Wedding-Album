@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { logOut } from "../../Redux/Actions/Auth";
 import cssFooter from "./footer.module.css";
 
-const Footer = () => {
-  const { LogOut } = this.props;
+const Footer = (props) => {
   return (
     <div className={cssFooter.footer}>
       <div className={cssFooter.gregInsta}>
@@ -45,7 +44,7 @@ const Footer = () => {
           />
         </a>
       </div>
-      <div className={cssFooter.logOutButton} onClick={() => LogOut()}>
+      <div className={cssFooter.logOutButton} onClick={() => props.LogOut()}>
         <button className={cssFooter.button}>Log Out</button>
       </div>
     </div>
@@ -54,7 +53,7 @@ const Footer = () => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    LogOut: () => dispatch(logOut()),
+    LogOut: () => dispatch(logOut())
   };
 };
 

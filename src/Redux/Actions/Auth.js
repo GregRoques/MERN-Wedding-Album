@@ -1,6 +1,6 @@
 import axios from "axios";
+import { browserName } from "react-device-detect";
 import { api } from "../../Dependencies/AxiosOrders";
-import { compId } from "../../Dependencies/userInfo";
 
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
@@ -18,14 +18,18 @@ export const logOut = () => {
   };
 };
 
-export const authCheckState = () => {
+export const authCheckState = (ipAddress) => {
   return (dispatch) => {
-    const lsToken = localStorage.getItem("token");
-    if (lsToken) {
+    const token = window.localStorage.getItem("GR-Wedding-Token");
+    console.log(token);
+    if (token) {
       axios
         .post(`${api}/isloggedin`, {
-          token: lsToken,
-          userId: compId,
+          token: token,
+          userId: {
+            browserName,
+            ipAddress,
+          },
         })
         .then((res) => {
           if (res.data === "YES") {

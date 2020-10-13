@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import axios from "axios";
 import { authCheckState } from "./Redux/Actions/Auth";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 
 class App extends Component {
   componentDidMount() {
-    this.props.onTryAutoSignIn();
+    axios("https://extreme-ip-lookup.com/json/").then((res) => {
+      const { query } = res.data;
+      this.props.onTryAutoSignIn(query);
+    });
   }
 
   NoPage = () => {
@@ -35,7 +39,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTryAutoSignIn: () => dispatch(authCheckState()),
+    onTryAutoSignIn: (ip) => dispatch(authCheckState(ip)),
   };
 };
 
