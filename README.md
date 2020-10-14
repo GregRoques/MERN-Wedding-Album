@@ -32,7 +32,6 @@ Site allowing family and friends to see photos and videos from our wedding.
 - npm i react-html-parser
 - npm i @babel/cli
 - npm i axios
-- npm i swr
 
 **Get User Info:**
 
