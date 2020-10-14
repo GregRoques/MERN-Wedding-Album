@@ -59,6 +59,14 @@ class Photos extends Component{
         e.preventDefault();
       }
 
+    handleScroll = e => {
+        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+        if (bottom) { 
+            console.log("bottom")
+        }
+     }
+
+
     render(){
 
         var currentPathname =((window.location.pathname).split('/photography/').pop()).replace(/["_"]/g, " ");
@@ -86,8 +94,8 @@ class Photos extends Component{
             <div className = { cssPhotos.fadeIn }>
                 { modalPhotoGallery }
                 <h1 className = {cssPhotos.albumTitleText}>{currentPathname}</h1>
-                <div className = { cssPhotos.photoGalleryContainer }>
-                    <div className = { cssPhotos.photoGrid }>
+                <div className = { cssPhotos.photoGalleryContainer } onScroll={(e) => this.handleScroll(e)}>
+                    <div className = { cssPhotos.photoGrid } >
                         { photoArray[currentPathname].map((image, i) => {
                             return(
                                 <div key={ i } className={cssPhotos.photoBox} onContextMenu={this.preventDragHandler} onDragStart={this.preventDragHandler}>
