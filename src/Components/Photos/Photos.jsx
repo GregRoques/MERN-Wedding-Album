@@ -1,24 +1,35 @@
 import React, { Component } from 'react';
+import PhotoModule from './PhotoModal';
+import photoModal from "./PhotoModal"
 import cssPhotos from './photos.module.css'
 
 // div scroll end for photos:
 // https://stackoverflow.com/questions/45585542/detecting-when-user-scrolls-to-bottom-of-div-with-react-js
 
-var photoArray = {}
-
 class Photos extends Component{
 
     state = {
+        images: [],
         modalShow: false,
         modalPhoto: null
-        
     }
 
     componentDidMount(){
         window.scrollTo(0, 0);
     }
 
-    pictureDisplayOn = (currentPhoto) =>{
+    handleScroll = e => {
+        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+        if (bottom) { 
+            console.log("bottom")
+        }
+     }
+
+     preventDragHandler = (e) => {
+        e.preventDefault();
+      }
+
+      pictureDisplayOn = (currentPhoto) =>{
         this.setState(prevState =>({
             modalShow: !prevState.modalShow,
             modalPhoto: currentPhoto
@@ -55,56 +66,30 @@ class Photos extends Component{
         })
     }
 
-    preventDragHandler = (e) => {
-        e.preventDefault();
-      }
-
-    handleScroll = e => {
-        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-        if (bottom) { 
-            console.log("bottom")
-        }
-     }
-
-
     render(){
-
-        var currentPathname =((window.location.pathname).split('/photography/').pop()).replace(/["_"]/g, " ");
-        let modalPhotoGallery = null
-
-        if(this.state.modalShow){
-            modalPhotoGallery=(
-                <div className= { cssPhotos.photoModal } >
-                    <div className={ cssPhotos.closePhotoModal } onClick={()=> this.pictureDisplayOff()}>x</div>
-                    <div className ={ cssPhotos.photoContent}>
-                        <div className={ cssPhotos.imageGalleryButtons } onClick={()=>this.clickL(this.state.modalPhoto, currentPathname)}>{`<`}</div>
-                        <div className={ cssPhotos.sliderContainer } onContextMenu={this.preventDragHandler} onDragStart={this.preventDragHandler}>
-                            <img alt={ currentPathname + this.state.modalPhoto } src={'/images/photography/' + photoArray[currentPathname][this.state.modalPhoto] }/>
-                        </div>
-                        <div className={ cssPhotos.imageGalleryButtons } onClick={()=>this.clickR(this.state.modalPhoto, currentPathname)}>{`>`}</div>
-                    </div>
-                    <div className ={ cssPhotos.pictureCounter }>
-                        { this.state.modalPhoto +1 }/{ photoArray[currentPathname].length }
-                    </div>
-                </div>
-            )
-        }
-        
+        const { modalPhoto, modalShow} = this.state
+        const { clickL, clickR, pictureDisplayOff, preventDragHandler, handleScroll, pictureDisplayOn } = this;
         return(
             <div className = { cssPhotos.fadeIn }>
-                { modalPhotoGallery }
+                { modalShow ? <PhotoModule
+                    image={ modalPhoto }
+                    rightClick = { clickR }
+                    leftClick = { clickL }
+                    closeModal = { pictureDisplayOff }
+                /> : "" }
                 <h1 className = {cssPhotos.albumTitleText}>{currentPathname}</h1>
-                <div className = { cssPhotos.photoGalleryContainer } onScroll={(e) => this.handleScroll(e)}>
+                <div className = { cssPhotos.photoGalleryContainer } onScroll={(e) => handleScroll(e)}>
                     <div className = { cssPhotos.photoGrid } >
                         { photoArray[currentPathname].map((image, i) => {
                             return(
-                                <div key={ i } className={cssPhotos.photoBox} onContextMenu={this.preventDragHandler} onDragStart={this.preventDragHandler}>
-                                    <img onClick={() => this.pictureDisplayOn(i) } alt={ currentPathname + i } src={'/images/photography/'+ image}/>
+                                <div key={ i } className={cssPhotos.photoBox} onContextMenu={preventDragHandler} onDragStart={preventDragHandler}>
+                                    <img onClick={() => pictureDisplayOn(i) } alt={ currentPathname + i } src={'/images/photography/'+ image}/>
                                 </div>
                             )
                         }) } 
                     </div>
                 </div>
+                {/* cats */}
             </div>
         )
         

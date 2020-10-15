@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactHtmlParser from "react-html-parser";
 import cssVideo from "./video.module.css";
 import { videoList } from "./videoList";
 
@@ -36,7 +35,9 @@ class Video extends Component {
             })}
           </select>
         </div>
-        <div className={cssVideo.videoAlign}>{ReactHtmlParser(currVid)}</div>
+        <div className={cssVideo.videoAlign}>
+          <iframe width="560" height="315" src={currVid} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
       </div>
     );
   }
