@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const { signInPW, TEST_isLoggedIn } = require("../util/password");
+const { signInPW, TEST_isLoggedIn } = require("../../util/password");
 
 router.post("/", (req, res, next) => {
   const { password, compId } = req.body;

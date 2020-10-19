@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { TEST_isLoggedIn } = require("../util/password");
+const { TEST_isLoggedIn } = require("../../util/password");
 
 router.post("/", (req, res, next) => {
   const { token, compId } = req.body;
