@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import PhotoModule from './PhotoModal';
-import photoModal from "./PhotoModal"
+import PhotoModal from "./PhotoModal"
 import cssPhotos from './photos.module.css'
 
 // div scroll end for photos:
@@ -10,12 +9,33 @@ class Photos extends Component{
 
     state = {
         images: [],
+        totalLength: 0,
         modalShow: false,
-        modalPhoto: null
+        modalPhoto: null,
+        error: "NONE"
     }
 
     componentDidMount(){
         window.scrollTo(0, 0);
+        this.getPhotos(total)
+    }
+
+    getPhotos = nextImages =>{ 
+        axios.get(`${api}/photography`, {
+            lengthStart = this.state.images === [] ? 0 : (album.images.length -1),
+            total: nextImages
+        })
+        .then(res =>{
+            this.setState(prevState =>({
+                images: prevState.images.push(req.body.images),
+                length: prevState.length > 0 ? prevState.length : res.body.length
+            }))
+        })
+        .catch(err =>{
+            this.setState({
+                error: err
+            })
+        })
     }
 
     handleScroll = e => {
@@ -29,19 +49,11 @@ class Photos extends Component{
         e.preventDefault();
       }
 
-      pictureDisplayOn = (currentPhoto) =>{
-        this.setState(prevState =>({
-            modalShow: !prevState.modalShow,
-            modalPhoto: currentPhoto
-        }))
-
-    }
-
-    pictureDisplayOff = () =>{
-        this.setState(prevState=>({
-            modalShow: !prevState.modalShow,
-            modalPhoto: null
-        }))
+    setDisplay = (show, image) =>{
+        this.setState({
+            modalShow: show,
+            modalPhoto: image
+        })
     }
 
     clickL = (i, album) =>{
@@ -67,32 +79,36 @@ class Photos extends Component{
     }
 
     render(){
-        const { modalPhoto, modalShow} = this.state
-        const { clickL, clickR, pictureDisplayOff, preventDragHandler, handleScroll, pictureDisplayOn } = this;
-        return(
+        const { modalPhoto, modalShow, error } = this.state
+        const { clickL, clickR, setDisplay, preventDragHandler, handleScroll  } = this;
+
+        return error === "NONE" ? (
             <div className = { cssPhotos.fadeIn }>
-                { modalShow ? <PhotoModule
+                <PhotoModal
                     image={ modalPhoto }
+                    isShown = { modalShow }
                     rightClick = { clickR }
                     leftClick = { clickL }
-                    closeModal = { pictureDisplayOff }
-                /> : "" }
+                    closeModal = { setDisplay }
+                />
                 <h1 className = {cssPhotos.albumTitleText}>{currentPathname}</h1>
                 <div className = { cssPhotos.photoGalleryContainer } onScroll={(e) => handleScroll(e)}>
                     <div className = { cssPhotos.photoGrid } >
                         { photoArray[currentPathname].map((image, i) => {
                             return(
                                 <div key={ i } className={cssPhotos.photoBox} onContextMenu={preventDragHandler} onDragStart={preventDragHandler}>
-                                    <img onClick={() => pictureDisplayOn(i) } alt={ currentPathname + i } src={'/images/photography/'+ image}/>
+                                    <img onClick={() => setDisplay(true, i) } alt={ currentPathname + i } src={'/images/photography/'+ image}/>
                                 </div>
                             )
                         }) } 
                     </div>
                 </div>
-                {/* cats */}
+            </div>
+        ) : (
+            <div>
+               <h2>{error}</h2> 
             </div>
         )
-        
     }
 }
 

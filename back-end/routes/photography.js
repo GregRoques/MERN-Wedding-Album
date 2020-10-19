@@ -12,16 +12,16 @@ let weddingAlbum = {
 const folderContents = "../public/images/weddingAlbum";
 
 const updateList = () => {
-  readdirSync(folderContents).forEach((image) => {
+  readdirSync(folderContents).map((image, i) => {
     if (
       image.toLocaleLowerCase().includes(".png") ||
       image.toLocaleLowerCase().includes(".jpg") ||
       image.toLocaleLowerCase().includes(".jpeg")
     ) {
-      weddingAlbum[folder].images.push(image);
+      weddingAlbum.images.push({ [i + 1]: image });
     }
   });
-  weddingAlbum[folder].length = readdirSync(folderContents).length;
+  weddingAlbum.length = readdirSync(folderContents).length;
   //console.log(weddingAlbum)
 };
 
@@ -43,6 +43,13 @@ const noPhotosError = () => {
 
 router.post("/", (req, res, next) => {
   if (weddingAlbum.length > 0) {
+    const { lengthStart, total } = req.data;
+    let currResponse = {
+      images: weddingAlbum.images.slice(lengthStart, total),
+    };
+    if (lengthStart === 0) {
+      currResponse[length] = weddingAlbum.length;
+    }
     res.json(weddingAlbum);
   } else {
     throw new noPhotosError();
