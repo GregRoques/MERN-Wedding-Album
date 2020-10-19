@@ -12,17 +12,17 @@ let weddingAlbum = {
 const folderContents = "../public/images/weddingAlbum/Full";
 
 const updateList = () => {
-  readdirSync(folderContents).map((image, i) => {
+  readdirSync(folderContents).map((image) => {
     if (
       image.toLocaleLowerCase().includes(".png") ||
       image.toLocaleLowerCase().includes(".jpg") ||
       image.toLocaleLowerCase().includes(".jpeg")
     ) {
-      weddingAlbum.images.push({ [i + 1]: image });
+      weddingAlbum.images.push(image);
     }
   });
   weddingAlbum.length = readdirSync(folderContents).length;
-  //console.log(weddingAlbum)
+  //console.log(weddingAlbum);
 };
 
 updateList();
@@ -40,17 +40,21 @@ const noPhotosError = () => {
   const message = "Error: No Photos could be returned at this time.";
   return message;
 };
-
+console.log(weddingAlbum.images.slice(95, 25));
 router.post("/", (req, res, next) => {
   if (weddingAlbum.length > 0) {
-    const { lengthStart, total } = req.data;
+    const { lengthStart } = req.body;
+    const end =
+      weddingAlbum.length - lengthStart >= 25
+        ? 25
+        : weddingAlbum.length - lengthStart;
+
     let currResponse = {
-      images: weddingAlbum.images.slice(lengthStart, total),
+      images: weddingAlbum.images.slice(lengthStart, lengthStart + end),
+      next: weddingAlbum.length - lengthStart > 25 ? true : false,
     };
-    if (lengthStart === 0) {
-      currResponse[length] = weddingAlbum.length;
-    }
-    res.json(weddingAlbum);
+    //console.log(currResponse);
+    res.json(currResponse);
   } else {
     throw new noPhotosError();
   }
