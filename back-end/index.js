@@ -3,8 +3,9 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const helmet = require("helmet");
-const logIn = require("./TEST_routes/logIn");
-const isLoggedIn = require("./TEST_routes/isLoggedIn");
+const logIn = require("./routes/TEST_routes/logIn_test"); //CURRENTLY TEST ROUTE
+const isLoggedIn = require("./routes/TEST_routes/isLoggedIn_test"); //CURRENTLY TEST ROUTE
+const photography = require("./routes/photography");
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 
 app.use("/login", logIn);
 app.use("/isloggedin", isLoggedIn);
+app.use("/photography", photography);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.get("/*", (req, res) => {
