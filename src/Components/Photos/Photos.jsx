@@ -20,6 +20,11 @@ class Photos extends Component{
         this.getPhotos(0, 25)
     }
 
+    // getPhotoRequestIndexes = (i) =>{
+    //     const { getPhotos } = this;
+    //     const { totalLength, images } = this.state;
+    // }
+
     getPhotos = (imageStart, nextImages) =>{ 
         axios.get(`${api}/photography`, {
             lengthStart = imageStart,
@@ -27,8 +32,8 @@ class Photos extends Component{
         })
         .then(res =>{
             this.setState(prevState =>({
-                images: prevState.images.push(req.body.images),
-                length: prevState.length > 0 ? prevState.length : res.body.length
+                images: prevState.images.splice(imageStart, 0, ...res.body.images),
+                length: prevState.totalLength > 0 ? prevState.totalLength : res.body.length
             }))
         })
         .catch(err =>{
