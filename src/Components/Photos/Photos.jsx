@@ -17,12 +17,12 @@ class Photos extends Component{
 
     componentDidMount(){
         window.scrollTo(0, 0);
-        this.getPhotos(total)
+        this.getPhotos(0, 25)
     }
 
-    getPhotos = nextImages =>{ 
+    getPhotos = (imageStart, nextImages) =>{ 
         axios.get(`${api}/photography`, {
-            lengthStart = this.state.images === [] ? 0 : (album.images.length -1),
+            lengthStart = imageStart,
             total: nextImages
         })
         .then(res =>{

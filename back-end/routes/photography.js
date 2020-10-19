@@ -9,7 +9,7 @@ let weddingAlbum = {
 
 // ====================================================================== Update Photo List
 
-const folderContents = "../public/images/weddingAlbum";
+const folderContents = "../public/images/weddingAlbum/Full";
 
 const updateList = () => {
   readdirSync(folderContents).map((image, i) => {
