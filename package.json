@@ -52,5 +52,5 @@
     "install-peerdeps": "^2.0.3",
     "prettier": "^2.1.2"
   },
-  "build": ["babel ./index.js --out-dir ./dist/index.js --no-comments", ["transform-remove-console"]]
+  "build": ["babel ./index.js --out-dir ./dist/index.js --no-comments"]
 }
