@@ -40,19 +40,22 @@ const noPhotosError = () => {
   const message = "Error: No Photos could be returned at this time.";
   return message;
 };
-console.log(weddingAlbum.images.slice(95, 25));
+
 router.post("/", (req, res, next) => {
   if (weddingAlbum.length > 0) {
     const { lengthStart } = req.body;
-    const end =
-      weddingAlbum.length - lengthStart >= 25
-        ? 25
-        : weddingAlbum.length - lengthStart;
+    //console.log(lengthStart);
+    // const end =
+    //   weddingAlbum.length - lengthStart >= 25
+    //     ? 25
+    //     : weddingAlbum.length - lengthStart;
 
     let currResponse = {
-      images: weddingAlbum.images.slice(lengthStart, lengthStart + end),
-      next: weddingAlbum.length - lengthStart > 25 ? true : false,
+      images: weddingAlbum.images.slice(lengthStart, lengthStart + 25),
     };
+    if (lengthStart === 0) {
+      currResponse.albumLength = weddingAlbum.length;
+    }
     //console.log(currResponse);
     res.json(currResponse);
   } else {

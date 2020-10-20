@@ -30,7 +30,6 @@ Site allowing family and friends to see photos and videos from our wedding.
 - npx i create-react-app
 - npm i react-router-dom
 - npm i react-html-parser
-- npm i @babel/cli
 - npm i axios
 
 **Get User Info:**
@@ -44,6 +43,11 @@ Site allowing family and friends to see photos and videos from our wedding.
 - npm i react-redux
 - npm i redux-thunk
 
+**Babel Build Plugins:**
+
+- npm install --save-dev @babel/core @babel/cli
+- npm i babel-plugin-transform-remove-console
+
 ### @babel/cli
 
 In the absence of TypeScript, this will remove all comments during build. Once installed, make sure the following lines are in your **package.json** file.
@@ -53,6 +57,22 @@ In the absence of TypeScript, this will remove all comments during build. Once i
     "@babel/cli": "^7.11.6"
   },
   "build": "babel ./index.js --out-dir ./dist/index.js --no-comments"
+```
+
+### babel-plugin-transform-remove-console
+
+(_removes all console.logs from build... see for guidelines: https://www.npmjs.com/package/babel-plugin-transform-remove-console_)
+
+- include .babelrc file in root directory with the following line:
+
+```
+{
+    "env": {
+        "build": {
+            "plugins": ["transform-remove-console"]
+        }
+    }
+}
 ```
 
 ## Back End
