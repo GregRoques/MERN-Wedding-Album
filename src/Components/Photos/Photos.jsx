@@ -60,47 +60,36 @@ class Photos extends Component {
         })
     }
 
-    clickL = (i, album) => {
-        i--
-        // if(i<0){
-        //     i = photoArray[album].length - 1
-        // }
-        this.setState({
-            modalPhoto: i
-        })
-    }
-
-    clickR = (i, album) => {
-        i++
-        // if(i> photoArray[album].length - 1){
-        //     i = 0
-        // }
+    nextPrevImage= (i) => {
         this.setState({
             modalPhoto: i
         })
     }
 
     render() {
-        const { modalPhoto, modalShow, error, albumLength } = this.state
-        const { clickL, clickR, setDisplay, preventDragHandler, handleScroll } = this;
+        const { images, indexStart, modalPhoto, modalShow, error, albumLength } = this.state
+        const { nextPrevImage, setDisplay, preventDragHandler, handleScroll } = this;
+
+        const nextMap = images.slice(indexStart, images.length-1)
         return error === "NONE" ? (
             <div className={cssPhotos.fadeIn}>
-                {/* <PhotoModal
+                <PhotoModal
                     image={ modalPhoto }
                     isShown = { modalShow }
-                    rightClick = { clickR }
-                    leftClick = { clickL }
+                    rightClick = { nextPrevImage }
+                    leftClick = { nextPrevImage }
                     closeModal = { setDisplay }
                     totalLength = { albumLength }
-                /> */}
+                />
                 <div className={cssPhotos.photoGrid} >
-                    {/* { photoArray[currentPathname].map((image, i) => {
+                    { images.map((image, i) => {
                             return(
                                 <div key={ i } className={cssPhotos.photoBox} onContextMenu={preventDragHandler} onDragStart={preventDragHandler}>
-                                    <img onClick={() => setDisplay(true, i) } alt={ currentPathname + i } src={'/images/photography/'+ image}/>
+                                    <img onClick={() => setDisplay(true, i) } alt={ `G+R_Wedding${i + 1}` } src={'/images/weddingAlbum/Full/'+ image}/>
+                                    
                                 </div>
                             )
-                        }) }  */}
+                        }) } 
                 </div>
             </div>
         ) : (

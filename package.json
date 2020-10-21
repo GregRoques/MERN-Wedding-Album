@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react-hooks": "^4.1.2",
-    "npm": "^6.14.8",
+    "npm": "^7.0.2",
     "peerdeps": "^1.1.1",
     "react": "^16.14.0",
     "react-device-detect": "^1.14.0",
@@ -25,7 +27,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -44,13 +45,12 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.1",
-    "@babel/core": "^7.12.3",
     "@imaginary-cloud/prettier-config": "^1.0.0",
-    "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint-plugin-react": "^7.21.5",
     "install-peerdeps": "^2.0.3",
     "prettier": "^2.1.2"
   },
-  "build": ["babel ./index.js --out-dir ./dist/index.js --no-comments"]
+  "build": [
+    "babel ./index.js --out-dir ./dist/index.js --no-comments"
+  ]
 }
