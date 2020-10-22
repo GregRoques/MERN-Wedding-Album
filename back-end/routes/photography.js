@@ -1,18 +1,19 @@
 const express = require("express");
 const router = express.Router();
+const path = require("path");
 const { readdirSync } = require("fs");
 
 let weddingAlbum = {
   images: [],
-  length: 0,
 };
 
 // ====================================================================== Update Photo List
 
-const folderContents = "../public/images/weddingAlbum/Full";
+const folderContents = "../../public/images/weddingAlbum/full";
+const mypath = path.join(__dirname, folderContents);
 
 const updateList = () => {
-  readdirSync(folderContents).map((image) => {
+  readdirSync(mypath).forEach((image) => {
     if (
       image.toLocaleLowerCase().includes(".png") ||
       image.toLocaleLowerCase().includes(".jpg") ||
@@ -21,8 +22,7 @@ const updateList = () => {
       weddingAlbum.images.push(image);
     }
   });
-  weddingAlbum.length = readdirSync(folderContents).length;
-  //console.log(weddingAlbum);
+  console.log(weddingAlbum);
 };
 
 updateList();
@@ -36,30 +36,17 @@ setInterval(() => {
 
 // ====================================================================== API Call
 
-const noPhotosError = () => {
-  const message = "Error: No Photos could be returned at this time.";
-  return message;
-};
-
 router.post("/", (req, res, next) => {
-  if (weddingAlbum.length > 0) {
+  if (weddingAlbum.images.length > 0) {
     const { lengthStart } = req.body;
-    //console.log(lengthStart);
-    // const end =
-    //   weddingAlbum.length - lengthStart >= 25
-    //     ? 25
-    //     : weddingAlbum.length - lengthStart;
-
     let currResponse = {
       images: weddingAlbum.images.slice(lengthStart, lengthStart + 25),
     };
     if (lengthStart === 0) {
-      currResponse.albumLength = weddingAlbum.length;
+      currResponse.albumLength = weddingAlbum.images.length;
     }
-    //console.log(currResponse);
+    console.log(currResponse);
     res.json(currResponse);
-  } else {
-    throw new noPhotosError();
   }
 });
 

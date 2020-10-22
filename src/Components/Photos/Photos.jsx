@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { api } from '../../Dependencies/AxiosOrders'
 //import PhotoModal from "./PhotoModal"
 import cssPhotos from './photos.module.css'
@@ -7,9 +8,9 @@ import cssPhotos from './photos.module.css'
 const stateDefault = {
     images: [],
     albumLength: 0,
-    indexStart: 0,
     modalShow: false,
     modalPhoto: null,
+    loaded:true
 }
 
 class Photos extends Component {
@@ -21,37 +22,34 @@ class Photos extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.getPhotos(this.state.images.length)
-    }
-
-    getPhotos = (length) => {
-        axios.post(`${api}/photography`, {
-            lengthStart: length,
-        })
-            .then(res => {
-                this.setState(prevState => ({
-                    images: [...prevState.images, ...res.data.images],
-                    albumLength: prevState.albumLength === 0 ? res.data.albumLength : prevState.albumLength,
-                    indexStart: prevState.images.length
-                }))
-                //console.log(`${this.state.images.length} ${this.state.indexStart}`)
-                if (this.state.images.length !== this.state.albumLength) {
-                    setTimeout(() => {
-                        this.getPhotos(this.state.images.length)
-                    }, 500)
-                }
-            })
-            .catch(err => {
-                this.setState({
-                    ...stateDefault,
-                    error: err
-                })
-            })
+        this.getPhotos()
     }
 
     preventDragHandler = (e) => {
         e.preventDefault();
     }
+
+
+    getPhotos = () => {
+        axios.post(`${api}/photography`, {
+            lengthStart: 0,
+        })
+        .then(res => {
+            this.setState(prevState => ({
+                images: [...prevState.images, ...res.data.images],
+                albumLength: prevState.albumLength === 0 ? res.data.albumLength : prevState.albumLength,
+                loaded: true
+            }))
+        })        
+        .catch(err => {
+            this.setState({
+                error: err.data
+            })
+        })
+ 
+    }
+
+    // ============================= pop-up Modal Methods
 
     setDisplay = (show, image) => {
         this.setState({
@@ -67,38 +65,60 @@ class Photos extends Component {
     }
 
     render() {
-        const { images, indexStart, modalPhoto, modalShow, error, albumLength } = this.state
-        const { nextPrevImage, setDisplay, preventDragHandler, handleScroll } = this;
-
-        const nextMap = images.slice(indexStart, images.length-1)
-        return error === "NONE" ? (
+        console.log(this.state.images)
+        return this.state.error === "NONE" ? (
             <div className={cssPhotos.fadeIn}>
-                <PhotoModal
-                    image={ modalPhoto }
-                    isShown = { modalShow }
-                    rightClick = { nextPrevImage }
-                    leftClick = { nextPrevImage }
-                    closeModal = { setDisplay }
-                    totalLength = { albumLength }
-                />
-                <div className={cssPhotos.photoGrid} >
-                    { images.map((image, i) => {
-                            return(
-                                <div key={ i } className={cssPhotos.photoBox} onContextMenu={preventDragHandler} onDragStart={preventDragHandler}>
-                                    <img onClick={() => setDisplay(true, i) } alt={ `G+R_Wedding${i + 1}` } src={'/images/weddingAlbum/Full/'+ image}/>
-                                    
+                {/* <PhotoModal
+                    image={ this.state.modalPhoto }
+                    isShown = { this.state.modalShow }
+                    rightClick = { this.nextPrevImage }
+                    leftClick = { this.nextPrevImage }
+                    closeModal = { this.setDisplay }
+                    totalLength = { this.state.albumLength }
+                /> */}
+                <div className={cssPhotos.imageGalleryContainer}>
+                    <InfiniteScroll
+                        dataLength={this.state.images}
+                        next={() => this.getPhotos()}
+                        hasMore={this.state.images.lenght !== this.state.albumLength}
+                        loader={
+                            <img
+                            src="/images/weddingAlbum/hearts-placeholder.gif"
+                            alt="loading"
+                            />
+                        }
+                        >
+                        <div className={cssPhotos.imageGrid} style={{ marginTop: "30px" }}>
+                            {this.state.loaded
+                            ? this.state.images.map((image, i) => (
+                                <div className={cssPhotos.imageItem}>
+                                    <img onClick={() => this.setDisplay(true, i) } key={ i + 1} alt={ `G+R_Wedding${i + 1}` } src={'/images/weddingAlbum/Full/'+ image}/>
                                 </div>
-                            )
-                        }) } 
+                                ))
+                            : ""}
+                        </div>
+                    </InfiniteScroll>
                 </div>
             </div>
         ) : (
                 <div>
-                    <h2>{error}</h2>
+                    <h2>{this.state.error}</h2>
                 </div>
             )
     }
 }
 
-
 export default Photos;
+
+
+
+{/* <div className={cssPhotos.photoGrid} >
+    { images.map((image, i) => {
+            return(
+                <div key={ i } className={cssPhotos.photoBox} onContextMenu={preventDragHandler} onDragStart={preventDragHandler}>
+                    
+                    
+                </div>
+            )
+        }) } 
+</div> */}
