@@ -11,7 +11,7 @@ const stateDefault = {
     albumLength: 0,
     modalShow: false,
     modalPhoto: null,
-    loaded:true
+    loaded:false
 }
 
 class Photos extends Component {
@@ -23,7 +23,7 @@ class Photos extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.getPhotos()
+        this.getPhotos(0)
     }
 
     preventDragHandler = (e) => {
@@ -31,9 +31,9 @@ class Photos extends Component {
     }
 
 
-    getPhotos = () => {
+    getPhotos = (start) => {
         axios.post(`${api}/photography`, {
-            lengthStart: 0,
+            lengthStart: start,
             loginCheck: this.props.isLoggedIn
         })
         .then(res => {
@@ -48,7 +48,7 @@ class Photos extends Component {
                 error: err.data
             })
         })
- 
+
     }
 
     // ============================= pop-up Modal Methods
@@ -67,7 +67,7 @@ class Photos extends Component {
     }
 
     render() {
-        console.log(this.state.images)
+
         return this.state.error === "NONE" ? (
             <div className={cssPhotos.fadeIn}>
                 {/* <PhotoModal
@@ -80,9 +80,9 @@ class Photos extends Component {
                 /> */}
                 <div className={cssPhotos.imageGalleryContainer}>
                     <InfiniteScroll
-                        dataLength={this.state.images}
-                        next={() => this.getPhotos()}
-                        hasMore={this.state.images.lenght !== this.state.albumLength}
+                        dataLength={this.state.images.length}
+                        next={() => this.getPhotos(this.state.images.length)}
+                        hasMore={this.state.images.length !== this.state.albumLength}
                         loader={
                             <img
                             src="/images/hearts-placeholder.gif"
@@ -116,4 +116,4 @@ const mapStateToProps = (state) => {
     };
   };
   
-  export default withRouter(connect(mapStateToProps,null)(Photos));
+  export default connect(mapStateToProps,null)(Photos);

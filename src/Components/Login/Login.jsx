@@ -92,7 +92,7 @@ class Login extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    LogIn: () => dispatch(logIn()),
+    LogIn: (password) => dispatch(logIn(password)),
   };
 };
 

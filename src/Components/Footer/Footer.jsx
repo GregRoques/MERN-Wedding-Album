@@ -6,11 +6,6 @@ import cssFooter from "./footer.module.css";
 const Footer = (props) => {
   return (
     <div className={cssFooter.footer}>
-      {/* <div className={cssFooter.pdfLink}>
-        <a href="" download="Greg_Rebecca_wedding_album">
-          Click here to see our wedding album pdf
-        </a>
-      </div> */}
       <div className={cssFooter.gregInsta}>
         <a
           href="https://www.instagram.com/qtrmileatatime"
@@ -45,6 +40,11 @@ const Footer = (props) => {
             // title="@thegurv"
             alt="Insta: @thegurv"
           />
+        </a>
+      </div>
+      <div className={cssFooter.pdfLink}>
+        <a href="" download="Greg_Rebecca_wedding_album">
+          Click here to see our wedding album pdf
         </a>
       </div>
       <div className={cssFooter.logOutButton} onClick={() => props.LogOut()}>

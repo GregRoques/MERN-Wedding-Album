@@ -3,12 +3,12 @@ const router = express.Router();
 const { TEST_isLoggedIn } = require("../../util/password");
 
 router.post("/", (req, res, next) => {
-  const { token, compId } = req.body;
-  //console.log(req.body);
+  const { token, userId } = req.body;
+  console.log(userId);
   if (token === TEST_isLoggedIn) {
-    res.json("YES");
+    res.json(TEST_isLoggedIn);
   } else {
-    res.json("NO");
+    throw "Sorry, no ticket...";
   }
 });
 

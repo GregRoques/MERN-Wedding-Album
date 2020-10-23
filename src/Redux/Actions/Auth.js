@@ -5,9 +5,10 @@ import { api } from "../../Dependencies/AxiosOrders";
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-export const logIn = () => {
+export const logIn = (token) => {
   return {
     type: AUTH_LOGIN,
+    payload: token,
   };
 };
 
@@ -21,7 +22,7 @@ export const logOut = () => {
 export const authCheckState = (ipAddress) => {
   return (dispatch) => {
     const token = window.localStorage.getItem("GR-Wedding-Token");
-    console.log(token);
+    //console.log(token);
     if (token) {
       axios
         .post(`${api}/isloggedin`, {
@@ -32,7 +33,8 @@ export const authCheckState = (ipAddress) => {
           },
         })
         .then((res) => {
-          const { updateToken } = res.data;
+          const updateToken = res.data;
+          //console.log(updateToken);
           if (updateToken.length > 10) {
             window.localStorage.setItem("GR-Wedding-Token", updateToken);
             dispatch(logIn(updateToken));
