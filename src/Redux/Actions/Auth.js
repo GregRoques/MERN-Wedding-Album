@@ -32,16 +32,16 @@ export const authCheckState = (ipAddress) => {
           },
         })
         .then((res) => {
-          if (res.data === "YES") {
-            dispatch(logIn());
+          const { updateToken } = res.data;
+          if (updateToken.length > 10) {
+            window.localStorage.setItem("GR-Wedding-Token", updateToken);
+            dispatch(logIn(updateToken));
           } else {
             dispatch(logOut());
           }
         })
-        .catch((err) => {
-          if (err) {
-            dispatch(logOut());
-          }
+        .catch(() => {
+          dispatch(logOut());
         });
     } else {
       dispatch(logOut());

@@ -9,12 +9,12 @@ const authReducer = (state = initialState, action) => {
     case actionType.AUTH_LOGIN:
       return {
         ...state,
-        isLoggedIn: true,
+        isLoggedIn: action.payload,
       };
     case actionType.AUTH_LOGOUT:
       return {
         ...state,
-        isLoggedIn: false,
+        isLoggedIn: "",
       };
     default:
       return state;

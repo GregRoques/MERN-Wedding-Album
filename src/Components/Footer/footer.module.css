@@ -7,6 +7,12 @@
     text-align: center;
 }
 
+.pdfLink{
+    margin: 1rem 0px;
+    font-size: 16px;
+    text-align: center;
+}
+
 .gregInsta,
 .rebeccaInsta {
     height: 60px;

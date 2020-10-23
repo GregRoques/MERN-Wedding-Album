@@ -6,6 +6,12 @@ import cssFooter from "./footer.module.css";
 const Footer = (props) => {
   return (
     <div className={cssFooter.footer}>
+      <div className={cssFooter.pdfLink}>
+        <a href="https://catingtonpost.com/" target="_blank">
+          {/* replace dummy href when pdf is ready for print */}
+          Click here to see our wedding album pdf
+        </a>
+      </div>
       <div className={cssFooter.gregInsta}>
         <a
           href="https://www.instagram.com/qtrmileatatime"

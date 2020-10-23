@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const { isAuthenticated } = require("../util/middleware/authenticator;");
 const { readdirSync } = require("fs");
 
 let weddingAlbum = {
@@ -36,7 +37,7 @@ setInterval(() => {
 
 // ====================================================================== API Call
 
-router.post("/", (req, res, next) => {
+router.post("/", isAuthenticated, (req, res, next) => {
   if (weddingAlbum.images.length > 0) {
     const { lengthStart } = req.body;
     let currResponse = {
@@ -47,6 +48,8 @@ router.post("/", (req, res, next) => {
     }
     console.log(currResponse);
     res.json(currResponse);
+  } else {
+    throw "Cannot Retrieve Photos at this time.";
   }
 });
 

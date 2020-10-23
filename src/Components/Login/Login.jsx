@@ -58,7 +58,7 @@ class Login extends Component {
           if(pw !== "save-error"){
             window.localStorage.setItem("GR-Wedding-Token", pw)
           };
-          LogIn();
+          LogIn(pw);
         }
       })
       .catch(() => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { api } from '../../Dependencies/AxiosOrders'
@@ -33,6 +34,7 @@ class Photos extends Component {
     getPhotos = () => {
         axios.post(`${api}/photography`, {
             lengthStart: 0,
+            loginCheck: this.props.isLoggedIn
         })
         .then(res => {
             this.setState(prevState => ({
@@ -83,7 +85,7 @@ class Photos extends Component {
                         hasMore={this.state.images.lenght !== this.state.albumLength}
                         loader={
                             <img
-                            src="/images/weddingAlbum/hearts-placeholder.gif"
+                            src="/images/hearts-placeholder.gif"
                             alt="loading"
                             />
                         }
@@ -108,17 +110,10 @@ class Photos extends Component {
     }
 }
 
-export default Photos;
-
-
-
-{/* <div className={cssPhotos.photoGrid} >
-    { images.map((image, i) => {
-            return(
-                <div key={ i } className={cssPhotos.photoBox} onContextMenu={preventDragHandler} onDragStart={preventDragHandler}>
-                    
-                    
-                </div>
-            )
-        }) } 
-</div> */}
+const mapStateToProps = (state) => {
+    return {
+      isLoggedIn: state.auth.isLoggedIn,
+    };
+  };
+  
+  export default withRouter(connect(mapStateToProps,null)(Photos));
