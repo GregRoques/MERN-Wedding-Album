@@ -40,7 +40,6 @@ setInterval(() => {
 router.post("/", isAuthenticated, (req, res, next) => {
   if (weddingAlbum.images.length > 0) {
     const { lengthStart } = req.body;
-    //console.log(lengthStart);
     let currResponse = {
       images: weddingAlbum.images.slice(lengthStart, lengthStart + 25),
     };
