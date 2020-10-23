@@ -20,13 +20,11 @@ const Footer = (props) => {
           <img
             src="/images/socialIcons/gregInsta1.png"
             alt="Insta: @qtrmileatatime"
-            // title="@qtrmileatatime"
           />
           <img
             className={cssFooter.gregInsta2}
             src="/images/socialIcons/gregInsta2.png"
             alt="Insta: @qtrmileatatime"
-            // title="@qtrmileatatime"
           />
         </a>
       </div>
