@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require("path");
 const sharp = require("sharp");
 const { isAuthenticated } = require("../util/middleware/authenticator_test");
-const { readdirSync, emptyDirSync } = require("fs-extra");
+const { readdirSync } = require("fs-extra");
 
 let weddingAlbum = {
   images: [],
@@ -15,7 +15,6 @@ const folderContents = "../../public/images/weddingAlbum";
 const originalPath = path.join(__dirname, `${folderContents}/full`);
 
 const updateList = () => {
-  emptyDirSync(`${folderContents}` / web);
   readdirSync(originalPath).forEach((image) => {
     if (
       image.toLocaleLowerCase().includes(".png") ||
@@ -23,12 +22,16 @@ const updateList = () => {
       image.toLocaleLowerCase().includes(".jpeg")
     ) {
       weddingAlbum.images.push(image);
-      sharp(`${folderContents}/full/${image}`)
-        .resize(2000)
-        .toFile(`${folderContents}/web/med_${image}`);
-      sharp(`${folderContents}/full${image}`)
-        .resize(600)
-        .toFile(`${folderContents}/web/tb_${image}`);
+      if (readdirSync(`${folderContents}/web`).includes(`med_${image}`)) {
+        sharp(`${folderContents}/full/${image}`)
+          .resize(2000)
+          .toFile(`${folderContents}/web/med_${image}`);
+      }
+      if (readdirSync(`${folderContents}/web`).includes(`tb_${image}`)) {
+        sharp(`${folderContents}/full${image}`)
+          .resize(600)
+          .toFile(`${folderContents}/web/tb_${image}`);
+      }
     }
   });
 };

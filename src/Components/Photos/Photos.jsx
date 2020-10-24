@@ -4,6 +4,7 @@ import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { api } from '../../Dependencies/AxiosOrders'
 //import PhotoModal from "./PhotoModal"
+import Zip from './Zip-Saver/Zip-Saver';
 import cssPhotos from './photos.module.css'
 
 const stateDefault = {
@@ -94,13 +95,17 @@ class Photos extends Component {
                             {this.state.loaded
                             ? this.state.images.map((image, i) => (
                                 <div className={cssPhotos.imageItem}>
-                                    <img onClick={() => this.setDisplay(true, i) } key={ i + 1} alt={ `G+R_Wedding${i + 1}` } src={'/images/weddingAlbum/Full/'+ image}/>
+                                    <img onClick={() => this.setDisplay(true, i) } key={ i + 1} alt={ `G+R_Wedding${i + 1}` } src={`/images/weddingAlbum/web/tb_${image}`}/>
                                 </div>
                                 ))
                             : ""}
                         </div>
                     </InfiniteScroll>
                 </div>
+                <Zip
+                    imagesList ={this.state.images}
+                    imageListFullLength ={this.state.albumLength}
+                />
             </div>
         ) : (
                 <div>

@@ -42,11 +42,6 @@ const Footer = (props) => {
           />
         </a>
       </div>
-      <div className={cssFooter.pdfLink}>
-        <a href="" download="Greg_Rebecca_wedding_album">
-          Download All High-Res Images
-        </a>
-      </div>
       <div className={cssFooter.logOutButton} onClick={() => props.LogOut()}>
         <button className={cssFooter.button}>Log Out</button>
       </div>
