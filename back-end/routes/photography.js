@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const sharp = require("sharp");
 const { isAuthenticated } = require("../util/middleware/authenticator_test");
-const { readdirSync } = require("fs");
+const { readdirSync, emptyDirSync } = require("fs-extra");
 
 let weddingAlbum = {
   images: [],
@@ -10,26 +11,32 @@ let weddingAlbum = {
 
 // ====================================================================== Update Photo List
 
-const folderContents = "../../public/images/weddingAlbum/full";
-const mypath = path.join(__dirname, folderContents);
+const folderContents = "../../public/images/weddingAlbum";
+const originalPath = path.join(__dirname, `${folderContents}/full`);
 
 const updateList = () => {
-  readdirSync(mypath).forEach((image) => {
+  emptyDirSync(`${folderContents}` / web);
+  readdirSync(originalPath).forEach((image) => {
     if (
       image.toLocaleLowerCase().includes(".png") ||
       image.toLocaleLowerCase().includes(".jpg") ||
       image.toLocaleLowerCase().includes(".jpeg")
     ) {
       weddingAlbum.images.push(image);
+      sharp(`${folderContents}/full/${image}`)
+        .resize(2000)
+        .toFile(`${folderContents}/web/med_${image}`);
+      sharp(`${folderContents}/full${image}`)
+        .resize(600)
+        .toFile(`${folderContents}/web/tb_${image}`);
     }
   });
-  //console.log(weddingAlbum);
 };
 
 updateList();
 
 setInterval(() => {
-  const isNewLength = readdirSync(folderContents).length;
+  const isNewLength = readdirSync(`${folderContents}/full`).length;
   if (weddingAlbum.images === [] || isNewLength !== weddingAlbum.length) {
     updateList();
   }
