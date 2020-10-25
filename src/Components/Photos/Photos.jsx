@@ -3,34 +3,51 @@ import { connect } from "react-redux";
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { api } from '../../Dependencies/AxiosOrders'
-//import PhotoModal from "./PhotoModal"
 import Zip from './Zip-Saver/Zip-Saver';
 import cssPhotos from './photos.module.css'
-
-const stateDefault = {
-    images: [],
-    albumLength: 0,
-    modalShow: false,
-    modalPhoto: null,
-    loaded:false
-}
+//import PhotoModal from "./PhotoModal"
+import ImageContextMenu from './ImageContextMenu/ImageContextMenu'
+import { GalleryContextMenu } from './ImageContextMenu/customMenus'
 
 class Photos extends Component {
 
     state = {
-        ...stateDefault,
+        images: [],
+        albumLength: 0,
+        modalShow: false,
+        modalPhoto: null,
+        loaded:false,
+        isImageContextShown: false,
         error: "NONE"
     }
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.getPhotos(0)
+        this.getPhotos(0);
+        document.addEventListener("click", this.handleClick);
     }
+
+    // ============================= Image Drag and Context Menu Methods
+
+    handleClick = (e) => {
+        if (isImageContextShown) this.setState({ isImageContextShown: false });
+      };
 
     preventDragHandler = (e) => {
         e.preventDefault();
     }
 
+    openContextMenu = (e, image) =>{
+        e.preventDefault();
+        this.setState({
+            isImageContextShown: true,
+        })
+        return(
+            <ImageContextMenu isShown={this.state.isImageContextShown} e={e} menu={() => <GalleryContextMenu image={image}/>}/>
+        )
+    }
+
+    // ============================= Backend Photo Request
 
     getPhotos = (start) => {
         axios.post(`${api}/photography`, {
@@ -67,8 +84,10 @@ class Photos extends Component {
         })
     }
 
-    render() {
+    // ============================= Render Block
 
+    render() {
+        const {images, albumLength, loaded, error} = this.state;
         return this.state.error === "NONE" ? (
             <div className={cssPhotos.fadeIn}>
                 {/* <PhotoModal
@@ -81,9 +100,9 @@ class Photos extends Component {
                 /> */}
                 <div className={cssPhotos.imageGalleryContainer}>
                     <InfiniteScroll
-                        dataLength={this.state.images.length}
-                        next={() => this.getPhotos(this.state.images.length)}
-                        hasMore={this.state.images.length !== this.state.albumLength}
+                        dataLength={images.length}
+                        next={() => this.getPhotos(images.length)}
+                        hasMore={images.length !== albumLength}
                         loader={
                             <img
                             src="/images/hearts-placeholder.gif"
@@ -92,10 +111,10 @@ class Photos extends Component {
                         }
                         >
                         <div className={cssPhotos.imageGrid} style={{ marginTop: "30px" }}>
-                            {this.state.loaded
-                            ? this.state.images.map((image, i) => (
+                            {loaded
+                            ? images.map((image, i) => (
                                 <div className={cssPhotos.imageItem}>
-                                    <img onClick={() => this.setDisplay(true, i) } key={ i + 1} alt={ `G+R_Wedding${i + 1}` } src={`/images/weddingAlbum/web/tb_${image}`}/>
+                                    <img onClick={() => this.setDisplay(true, i) } onDragStart={e=> this.preventDragHandler(e)} onContextMenu={e=> this.openContextMenu(e,image)} key={ i + 1} alt={ `G+R_Wedding${i + 1}` } src={`/images/weddingAlbum/web/tb_${image}`}/>
                                 </div>
                                 ))
                             : ""}
@@ -103,13 +122,13 @@ class Photos extends Component {
                     </InfiniteScroll>
                 </div>
                 <Zip
-                    imagesList ={this.state.images}
-                    imageListFullLength ={this.state.albumLength}
+                    imagesList ={images}
+                    imageListFullLength ={albumLength}
                 />
             </div>
         ) : (
                 <div>
-                    <h2>{this.state.error}</h2>
+                    <h2>{error}</h2>
                 </div>
             )
     }

@@ -39,8 +39,9 @@ const updateList = () => {
 updateList();
 
 setInterval(() => {
-  const isNewLength = readdirSync(`${folderContents}/full`).length;
-  if (weddingAlbum.images === [] || isNewLength !== weddingAlbum.length) {
+  const originalLength = readdirSync(`${folderContents}/full`).length;
+  const resizedLength = readdirSync(`${folderContents}/web`).length;
+  if (weddingAlbum.images === [] || originalLength * 2 !== resizedLength) {
     updateList();
   }
 }, 86400000); //check once a day and update if list is empty or if list-length has changed
