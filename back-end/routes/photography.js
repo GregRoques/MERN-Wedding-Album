@@ -13,6 +13,7 @@ let weddingAlbum = {
 
 const folderContents = "../../public/images/weddingAlbum";
 const originalPath = path.join(__dirname, `${folderContents}/full`);
+const webPath = readdirSync(`${folderContents}/web`);
 
 const updateList = () => {
   readdirSync(originalPath).forEach((image) => {
@@ -22,12 +23,12 @@ const updateList = () => {
       image.toLocaleLowerCase().includes(".jpeg")
     ) {
       weddingAlbum.images.push(image);
-      if (readdirSync(`${folderContents}/web`).includes(`med_${image}`)) {
+      if (!webPath.includes(`med_${image}`)) {
         sharp(`${folderContents}/full/${image}`)
           .resize(2000)
           .toFile(`${folderContents}/web/med_${image}`);
       }
-      if (readdirSync(`${folderContents}/web`).includes(`tb_${image}`)) {
+      if (!webPath.includes(`tb_${image}`)) {
         sharp(`${folderContents}/full${image}`)
           .resize(600)
           .toFile(`${folderContents}/web/tb_${image}`);
