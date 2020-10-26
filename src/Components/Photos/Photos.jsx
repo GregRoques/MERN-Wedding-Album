@@ -7,7 +7,6 @@ import Zip from './Zip-Saver/Zip-Saver';
 import cssPhotos from './photos.module.css'
 //import PhotoModal from "./PhotoModal"
 import ImageContextMenu from './ImageContextMenu/ImageContextMenu'
-import { GalleryContextMenu } from './ImageContextMenu/customMenus'
 
 class Photos extends Component {
 
@@ -17,35 +16,20 @@ class Photos extends Component {
         modalShow: false,
         modalPhoto: null,
         loaded:false,
-        isImageContextShown: false,
-        error: "NONE"
+        error: "NONE",
     }
 
     componentDidMount() {
         window.scrollTo(0, 0);
         this.getPhotos(0);
-        document.addEventListener("click", this.handleClick);
     }
 
     // ============================= Image Drag and Context Menu Methods
 
-    handleClick = (e) => {
-        if (isImageContextShown) this.setState({ isImageContextShown: false });
-      };
-
-    preventDragHandler = (e) => {
+    preventImageTheft = (e) => {
         e.preventDefault();
     }
 
-    openContextMenu = (e, image) =>{
-        e.preventDefault();
-        this.setState({
-            isImageContextShown: true,
-        })
-        return(
-            <ImageContextMenu isShown={this.state.isImageContextShown} e={e} menu={() => <GalleryContextMenu image={image}/>}/>
-        )
-    }
 
     // ============================= Backend Photo Request
 
@@ -87,7 +71,7 @@ class Photos extends Component {
     // ============================= Render Block
 
     render() {
-        const {images, albumLength, loaded, error} = this.state;
+        const {images, albumLength, loaded, error, contextMenu} = this.state;
         return this.state.error === "NONE" ? (
             <div className={cssPhotos.fadeIn}>
                 {/* <PhotoModal
@@ -98,6 +82,7 @@ class Photos extends Component {
                     closeModal = { this.setDisplay }
                     totalLength = { this.state.albumLength }
                 /> */}
+                <ImageContextMenu isShown={contextMenu.isImageContextShown} coordinates={contextMenu.coordinates} saveImage={contextMenu.saveImage}/>
                 <div className={cssPhotos.imageGalleryContainer}>
                     <InfiniteScroll
                         dataLength={images.length}
@@ -114,17 +99,17 @@ class Photos extends Component {
                             {loaded
                             ? images.map((image, i) => (
                                 <div className={cssPhotos.imageItem}>
-                                    <img onClick={() => this.setDisplay(true, i) } onDragStart={e=> this.preventDragHandler(e)} onContextMenu={e=> this.openContextMenu(e,image)} key={ i + 1} alt={ `G+R_Wedding${i + 1}` } src={`/images/weddingAlbum/web/tb_${image}`}/>
+                                    <img onClick={() => this.setDisplay(true, i) } onDragStart={e=> this.preventImageTheft(e)} onContextMenu={e=> this.preventImageTheft(e)} key={ i + 1} alt={ `G+R_Wedding${i + 1}` } src={`/images/weddingAlbum/web/tb_${i}.jpeg`}/>
                                 </div>
                                 ))
                             : ""}
                         </div>
                     </InfiniteScroll>
                 </div>
-                <Zip
+                {/* <Zip
                     imagesList ={images}
                     imageListFullLength ={albumLength}
-                />
+                /> */}
             </div>
         ) : (
                 <div>

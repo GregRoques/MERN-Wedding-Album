@@ -4,7 +4,7 @@ const { TEST_isLoggedIn } = require("../../util/password");
 
 router.post("/", (req, res, next) => {
   const { token, userId } = req.body;
-  console.log(userId);
+
   if (token === TEST_isLoggedIn) {
     res.json(TEST_isLoggedIn);
   } else {

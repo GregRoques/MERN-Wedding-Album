@@ -10,7 +10,7 @@ const zipImages = ({imagesList}) =>{
     let zip = new JSZip();
     let folder = zip.folder('images')
     imagesList.map((image,i)=>{
-        folder.file(`${imageDirectory}/${image}`, imgData, {base64:true})
+        folder.file(`${image}`, `${imageDirectory}/${image}`, {base64:true})
 
         if((i+1) === imagesList.length){
             folder.generateAsync({type:'blob'}).then((content)=> {

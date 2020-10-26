@@ -6,7 +6,7 @@ import Photos from "../Photos/Photos";
 
 class Home extends Component {
   state = {
-    selected: "video",
+    selected: "photos",
   };
 
   setView = (type) => {
