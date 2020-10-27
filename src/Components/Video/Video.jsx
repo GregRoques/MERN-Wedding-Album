@@ -7,6 +7,10 @@ class Video extends Component {
     currVid: videoList.Feature_Video,
   };
 
+  componentDidMount(){
+    window.scrollTo(0, 0);
+  }
+  
   onChangeHandler = (e) => {
     const { value } = e.target;
 

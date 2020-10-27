@@ -1,0 +1,13 @@
+.pdfLink{
+    text-align: center;
+    color:blue;
+    text-decoration: underline;
+    margin-top: 3rem;
+}
+.pdfLink a{
+    font-size: 1.5rem;
+}
+.pdfLink:hover{
+    cursor: pointer;
+}
+  

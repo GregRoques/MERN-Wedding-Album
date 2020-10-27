@@ -4,6 +4,7 @@ const path = require("path");
 const sharp = require("sharp");
 const { isAuthenticated } = require("../util/middleware/authenticator_test");
 const { readdirSync } = require("fs-extra");
+const AdmZip = require("adm-zip");
 
 let weddingAlbum = {
   images: [],
@@ -12,6 +13,7 @@ let weddingAlbum = {
 // ====================================================================== Update Photo List
 
 const folderContents = "../../public/images/weddingAlbum";
+const zipPath = path.join(__dirname, folderContents);
 const originalPath = path.join(__dirname, `${folderContents}/full`);
 const webPath = path.join(__dirname, `${folderContents}/web`);
 
@@ -47,6 +49,9 @@ const updateList = () => {
       }
     }
   });
+  const file = new AdmZip();
+  file.addLocalFolder(originalPath);
+  file.writeZip(`${zipPath}/G+R_WeddingAlbumFull.zip`);
 };
 
 updateList();

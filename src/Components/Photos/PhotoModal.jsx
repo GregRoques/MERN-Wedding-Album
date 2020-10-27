@@ -1,6 +1,8 @@
 import React from 'react';
 import cssPhotoModal from './photos.module.css'
 
+
+
 const PhotoModal = props => {
     const { image, nextDirection, closeModal, isShown, stopAutoDownload, totalLength, download } = props;
     return  isShown ? (
@@ -24,7 +26,7 @@ const PhotoModal = props => {
             </div>
         </div>
         <div className ={ cssPhotoModal.pictureCounter }>
-            <a href={`/images/weddingAlbum/full${download}`} download={`G+R_Wedding_${image + 1}`}>Save</a>
+            <a href={`/images/weddingAlbum/full/${download}`} download={`G+R_Wedding_${image + 1}.${download.split('.')[1]}`}>Save</a>
         </div>
     </div>
     ) : ""
