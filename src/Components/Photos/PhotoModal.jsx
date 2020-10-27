@@ -17,7 +17,7 @@ const PhotoModal = props => {
                 : ""
             }   
             <div className={ cssPhotoModal.sliderContainer } onDragStart={e=> stopAutoDownload(e)} onContextMenu={e=> stopAutoDownload(e)}>
-                <img alt={image } src={ image }/>
+                <img alt={image} src={`/images/weddingAlbum/web/med_${image}.jpeg`}/>
             </div>
             { image !== totalLength ?
                 <div className={ cssPhotoModal.imageGalleryButtons } onClick={()=>nextDirection(image +1)}>{`>`}</div>
