@@ -10,12 +10,15 @@ let weddingAlbum = {
   images: [],
 };
 
-// ====================================================================== Update Photo List
+// ====================================================================== Links
 
 const folderContents = "../../public/images/weddingAlbum";
-const zipPath = path.join(__dirname, folderContents);
+
 const originalPath = path.join(__dirname, `${folderContents}/full`);
 const webPath = path.join(__dirname, `${folderContents}/web`);
+const zipPath = path.join(__dirname, `${folderContents}/zip`);
+
+// ====================================================================== Update Photo List
 
 const convertForWeb = (image, index, path) => {
   const isMedOrThumbNail = path === "med" ? 1800 : 800;
@@ -41,25 +44,21 @@ const updateList = () => {
       image.toLocaleLowerCase().includes(".jpeg")
     ) {
       weddingAlbum.images.push(image);
-      if (!webPath.includes(`med_${i}.jpeg`)) {
-        convertForWeb(image, i, "med");
-      }
-      if (!webPath.includes(`tb_${i}.jpeg`)) {
-        convertForWeb(image, i, "tb");
-      }
+      // convertForWeb(image, i, "med");
+      // convertForWeb(image, i, "tb");
     }
   });
-  const file = new AdmZip();
-  file.addLocalFolder(originalPath);
-  file.writeZip(`${zipPath}/G+R_WeddingAlbumFull.zip`);
+  // const file = new AdmZip();
+  // file.addLocalFolder(originalPath);
+  // file.writeZip(`${zipPath}/G+R_WeddingAlbumFull.zip`);
 };
 
 updateList();
 
 setInterval(() => {
-  const originalLength = readdirSync(`${folderContents}/full`).length;
-  const resizedLength = readdirSync(`${folderContents}/web`).length;
-  if (weddingAlbum.images === [] || originalLength * 2 !== resizedLength) {
+  const originalLength = readdirSync(originalPath).length;
+  const webLength = readdirSync(webPath).length;
+  if (weddingAlbum.images === [] || originalLength * 2 !== webLength) {
     updateList();
   }
 }, 86400000); //check once a day and update if list is empty or if list-length has changed
