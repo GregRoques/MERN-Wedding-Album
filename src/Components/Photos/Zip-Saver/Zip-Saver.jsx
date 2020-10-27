@@ -1,5 +1,5 @@
 import React from 'react';
-import cssZip from "./module.zip-saver";
+import cssZip from "./module.zip-saver.css";
 import { JSZip } from 'jszip';
 import { saveAs } from "file-saver"
 

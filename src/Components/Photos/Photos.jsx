@@ -6,7 +6,6 @@ import { api } from '../../Dependencies/AxiosOrders'
 import Zip from './Zip-Saver/Zip-Saver';
 import cssPhotos from './photos.module.css'
 import PhotoModal from "./PhotoModal"
-import ImageContextMenu from './ImageContextMenu/ImageContextMenu'
 
 class Photos extends Component {
 
@@ -83,7 +82,6 @@ class Photos extends Component {
                     download ={images[modalPhoto]}
                     totalLength = { images.length -1 }
                 />
-                <ImageContextMenu isShown={contextMenu.isImageContextShown} coordinates={contextMenu.coordinates} saveImage={contextMenu.saveImage}/>
                 <div className={cssPhotos.imageGalleryContainer}>
                     <InfiniteScroll
                         dataLength={images.length}
