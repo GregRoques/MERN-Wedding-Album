@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { api } from '../../Dependencies/AxiosOrders'
 import Zip from './Zip-Saver/Zip-Saver';
 import cssPhotos from './photos.module.css'
-//import PhotoModal from "./PhotoModal"
+import PhotoModal from "./PhotoModal"
 import ImageContextMenu from './ImageContextMenu/ImageContextMenu'
 
 class Photos extends Component {
@@ -71,17 +71,18 @@ class Photos extends Component {
     // ============================= Render Block
 
     render() {
-        const {images, albumLength, loaded, error, contextMenu} = this.state;
+        const {images, albumLength, loaded, error, contextMenu, modalPhoto, modalShow} = this.state;
         return this.state.error === "NONE" ? (
             <div className={cssPhotos.fadeIn}>
-                {/* <PhotoModal
-                    image={ this.state.modalPhoto }
-                    isShown = { this.state.modalShow }
-                    rightClick = { this.nextPrevImage }
-                    leftClick = { this.nextPrevImage }
+                <PhotoModal
+                    image={ modalPhoto }
+                    isShown = { modalShow }
+                    stopAutoDownload = { this.preventImageTheft }
+                    nextDirection = { this.nextPrevImage }
                     closeModal = { this.setDisplay }
-                    totalLength = { this.state.albumLength }
-                /> */}
+                    download ={images[modalPhoto]}
+                    totalLength = { images.length -1 }
+                />
                 <ImageContextMenu isShown={contextMenu.isImageContextShown} coordinates={contextMenu.coordinates} saveImage={contextMenu.saveImage}/>
                 <div className={cssPhotos.imageGalleryContainer}>
                     <InfiniteScroll
@@ -106,10 +107,10 @@ class Photos extends Component {
                         </div>
                     </InfiniteScroll>
                 </div>
-                {/* <Zip
+                <Zip
                     imagesList ={images}
                     imageListFullLength ={albumLength}
-                /> */}
+                />
             </div>
         ) : (
                 <div>

@@ -3,31 +3,29 @@ import cssPhotoModal from './photos.module.css'
 
 image={ modalPhoto }
 isShown = { modalShow }
-rightClick = { nextPrevImage }
-leftClick = { nextPrevImage }
+nextDirection = { nextPrevImage }
 closeModal = { setDisplay }
-totalLength = { albumLength }
 
 const PhotoModal = props => {
-    const { image, totalLength, rightClick, leftClick, closeModal, isShown } = props;
+    const { image, nextDirection, closeModal, isShown, stopAutoDownload, totalLength } = props;
     return  isShown ? (
         <div className= { cssPhotoModal.photoModal } >
         <div className={ cssPhotoModal.closePhotoModal } onClick={()=> closeModal(false, null)}>x</div>
         <div className ={ cssPhotoModal.photoContent}>
             { image !== 0 ?
-                <div className={ cssPhotoModal.imageGalleryButtons } onClick={()=>leftClick(image -1)}>{`<`}</div>
+                <div className={ cssPhotoModal.imageGalleryButtons } onClick={()=>nextDirection(image -1)}>{`<`}</div>
                 : ""
             }   
-            <div className={ cssPhotoModal.sliderContainer }>
+            <div className={ cssPhotoModal.sliderContainer } onDragStart={e=> stopAutoDownload(e)} onContextMenu={e=> stopAutoDownload(e)}>
                 <img alt={image } src={ image }/>
             </div>
             { image !== totalLength ?
-                <div className={ cssPhotoModal.imageGalleryButtons } onClick={()=>rightClick(image +1)}>{`>`}</div>
+                <div className={ cssPhotoModal.imageGalleryButtons } onClick={()=>nextDirection(image +1)}>{`>`}</div>
                 : ""
             }
         </div>
         <div className ={ cssPhotoModal.pictureCounter }>
-            { image +1 }/{ totalLength }
+            <a href={`/images/weddingAlbum/full${image}`} download>Download</a>
         </div>
     </div>
     ) : ""
