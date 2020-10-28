@@ -96,3 +96,25 @@ textarea:placeholder-shown {
     display: flex;
     justify-content: center;
 }
+
+.isLoading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: hearts 0s 1s forwards;
+}
+
+.isLoading IMG{
+    width:300px;
+}
+
+@keyframes hearts{
+    0%{
+        opacity: 0
+    }
+    100%{
+        opacity: 1
+    }
+}

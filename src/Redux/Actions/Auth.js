@@ -13,7 +13,7 @@ export const logIn = (token) => {
 };
 
 export const logOut = () => {
-  localStorage.removeItem("token");
+  window.localStorage.removeItem("GR-Wedding-Token");
   return {
     type: AUTH_LOGOUT,
   };

@@ -6,6 +6,7 @@ import { api } from '../../Dependencies/AxiosOrders'
 import Zip from './Zip-Saver/Zip-Saver';
 import cssPhotos from './photos.module.css'
 import PhotoModal from "./PhotoModal"
+import { css } from 'emotion';
 
 class Photos extends Component {
 
@@ -89,6 +90,7 @@ class Photos extends Component {
                         hasMore={images.length !== albumLength}
                         loader={
                             <img
+                            className={cssPhotos.loader}
                             src="/images/hearts-placeholder.gif"
                             alt="loading"
                             />

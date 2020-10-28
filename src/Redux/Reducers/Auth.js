@@ -1,7 +1,8 @@
 import * as actionType from "../Actions/Auth";
 
 const initialState = {
-  isLoggedIn: false,
+  isLoggedIn: "",
+  isLoaded: "no",
 };
 
 const authReducer = (state = initialState, action) => {
@@ -10,11 +11,13 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: action.payload,
+        isLoaded: "no",
       };
     case actionType.AUTH_LOGOUT:
       return {
         ...state,
         isLoggedIn: "",
+        isLoaded: "yes",
       };
     default:
       return state;

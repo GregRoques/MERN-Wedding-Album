@@ -69,7 +69,8 @@ class Login extends Component {
 
   render() {
     const { password, placeholder } = this.state;
-    return (
+    const { isLoaded } = this.props;
+    return isLoaded == "yes" ? (
       <div>
         <form onChange={this.onChangeHandler} onSubmit={(e) => this.onSubmitHanlder(e)}>
           <input
@@ -86,9 +87,17 @@ class Login extends Component {
           </div>
         </form>
       </div>
-    );
+    ) : <div className={cssLogin.isLoading}>
+        <img src="/images/hearts-placeholder.gif"/>
+    </div>;
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isLoaded: state.auth.isLoaded,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -96,4 +105,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
