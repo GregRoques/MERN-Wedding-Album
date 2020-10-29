@@ -1,0 +1,109 @@
+.photoModal {
+    position: fixed;
+    top:0px;
+    left: 0;
+    bottom: 0;
+    top:0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 8;
+    margin-top: 55px;
+    margin-bottom: 0px;
+    animation-name: up;
+    animation-duration:1s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes up{
+    0%{
+        height:0%;
+    }
+    100%{
+        height: 100%;
+    }
+  }
+
+.photoContent{
+  position: absolute;
+  display:flex;
+  flex-direction: row;
+  /* left: 50%;
+  transform: translate(-50%); */
+  width: 100%;
+  height:100%
+}
+
+.sliderContainer{
+  width:inherit;;
+  height: 97.25%;
+}
+
+.sliderContainer IMG {
+  width: inherit;
+  height: inherit;
+  object-fit: contain;
+}
+
+
+.pictureCounter a{
+  position: fixed;
+  z-index:98;
+  margin-top:1rem;
+  right:2rem;
+  fill: white;
+  text-align: right;
+  text-decoration: none !important;
+  color:white !important;
+  font-weight: 200;
+  font-size: 1rem;
+  opacity:0;
+  animation: in .25s 1s forwards;
+  user-select: none;
+}
+
+@keyframes in{
+  0%{
+      opacity: 0
+  }
+  100%{
+      opacity: 1
+  }
+}
+
+.closePhotoModal{
+  position: fixed;
+  z-index:99;
+  margin-top:.5rem;
+  left:2rem;
+  text-align: left;
+  color:white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  user-select: none;
+ }
+
+.imageGalleryButtons{
+  /* position: relative; */
+  display: flex;
+  cursor: pointer;
+  flex-direction: row;
+  align-content:center;
+  align-items: center;
+  user-select: none;
+  margin: 2rem;
+  color:white;
+  /* color:black;
+  background-color: white;
+  height: 3rem;
+  width: 3rem;
+  margin: 1rem;
+  text-align: center;
+  vertical-align: center;
+  border-radius: 50%; */
+}
+.imageGalleryButtons div{
+  font-size:2rem;
+  font-weight:bold;
+}
+  
+  

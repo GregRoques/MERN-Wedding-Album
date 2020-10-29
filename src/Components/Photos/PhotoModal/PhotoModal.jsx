@@ -1,7 +1,5 @@
 import React from 'react';
-import cssPhotoModal from './photos.module.css'
-
-
+import cssPhotoModal from './photoModal.module.css'
 
 const PhotoModal = props => {
     const { image, nextDirection, closeModal, isShown, stopAutoDownload, totalLength, download } = props;
@@ -16,7 +14,7 @@ const PhotoModal = props => {
             }   
             </div>
             <div className={ cssPhotoModal.sliderContainer } onDragStart={e=> stopAutoDownload(e)} onContextMenu={e=> stopAutoDownload(e)}>
-                <img alt={image} src={`/images/weddingAlbum/web/med_${image}.jpeg`}/>
+                <img name={download} alt={image} src={`/images/weddingAlbum/web/med_${image}.jpeg`}/>
             </div>
             <div className={ cssPhotoModal.imageGalleryButtons }>
                 { image !== totalLength ?
@@ -26,7 +24,7 @@ const PhotoModal = props => {
             </div>
         </div>
         <div className ={ cssPhotoModal.pictureCounter }>
-            <a href={`/images/weddingAlbum/full/${download}`} download={`G+R_Wedding_${image + 1}.${download.split('.')[1]}`}>Save</a>
+            <a href={`/images/weddingAlbum/full/${download}`} download={`G+R_Wedding_${image + 1}.${download.split('.')[1]}`}><img src='/images/save_alt-24px.svg'/></a>
         </div>
     </div>
     ) : ""
