@@ -26,7 +26,7 @@ class Home extends Component {
     const { setView } = this;
     const { selected } = this.state;
     return (
-      <div className={cssLayout.homeBody}>
+      <div className={cssLayout.homeBody} onContextMenu={e=> e.preventDefault()}>
         <div className={cssLayout.header}>
           <span>
             <Link onClick={()=>{this.setView("video")}} className={selected === "video" ? cssLayout.headerSelected : cssLayout.headerNotSelected} to="/video">Video</Link>
