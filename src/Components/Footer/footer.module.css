@@ -37,11 +37,14 @@
 }
 
 .logOutButton {
+    display: flex;
+    justify-content: center;
     margin: 1rem 0px 1rem 0px;
 }
 
 
 .button {
+    margin: 0px 1rem;
     display: inline-block;
     padding: .5rem 1rem;
     border-radius: 10rem;

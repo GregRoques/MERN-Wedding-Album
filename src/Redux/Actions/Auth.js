@@ -22,8 +22,7 @@ export const logOut = () => {
 export const authCheckState = (ipAddress) => {
   return (dispatch) => {
     const token = window.localStorage.getItem("GR-Wedding-Token");
-    //console.log(token);
-    if (token) {
+    if (token && ipAddress !== "") {
       axios
         .post(`${api}/isloggedin`, {
           token: token,

@@ -3,29 +3,47 @@ import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 import { authCheckState } from "./Redux/Actions/Auth";
-import Home from "./Components/Home/Home";
+import Layout from "./Components/Layout/Layout";
+import Photos from "./Components/Photos/Photos";
+import Video from "./Components/Video/Video";
+import Contact from "./Components/Contact/Contact";
 import Login from "./Components/Login/Login";
 
 class App extends Component {
-  componentDidMount() {
-    axios("https://extreme-ip-lookup.com/json/").then((res) => {
-      const { query } = res.data;
-      this.props.onTryAutoSignIn(query);
-    });
+  async componentDidMount() {
+    const ip = await axios("https://extreme-ip-lookup.com/json/")
+      .then((res) => {
+        return res.data;
+      })
+      .catch(() => {
+        return "";
+      });
+    this.props.onTryAutoSignIn(ip);
   }
 
   NoPage = () => {
-    return <Redirect push to="/" />;
+    return <Redirect push to={!this.props.isLoggedIn ? "/login" : "/photos"} />;
   };
 
   render() {
     const { isLoggedIn } = this.props;
     return (
       <div>
-        <Switch>
-          <Route exact path="/" component={isLoggedIn ? Home : Login} />
-          <Route component={this.NoPage} />
-        </Switch>
+        {isLoggedIn === "" ? (
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route component={this.NoPage} />
+          </Switch>
+        ) : (
+          <Layout>
+            <Switch>
+              <Route exact path="/photos" component={Photos} />
+              <Route exact path="/video" component={Video} />
+              <Route exact path="/contact" component={Contact} />
+              <Route component={this.NoPage} />
+            </Switch>
+          </Layout>
+        )}
       </div>
     );
   }

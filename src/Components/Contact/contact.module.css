@@ -1,0 +1,144 @@
+.messageGrid{
+    height: auto;
+    display: grid; 
+    margin-top: 35px;
+    grid-template-columns: 50% 50%;
+    row-gap: 1rem;
+}
+
+.header{
+    font-family: 'Oleo Script', cursive;
+    color: #2677B9;
+    font-size:60px;
+    margin-bottom: 10px;
+}
+
+.intro {
+    padding: 0px 15% 0px 15%;
+    margin-bottom: 10px;
+}
+
+.shortForm {
+    margin: 10px 0px 5px 0px;
+    text-indent: 10px;
+    font-size:14px;
+    width: 80%;
+    height: 30px;
+    border:none;
+    border-radius:5px;
+    background-color:rgb(211,211,211,0.75);
+    color:black;
+}
+
+input:placeholder-shown, textarea:placeholder-shown{
+    color:darkgray;
+}
+
+.messageForm{
+    margin: 10px 0px 10px 0px;
+    padding: 10px;
+    width: 80%;
+    height: 255px;
+    border:none;
+    border-radius:5px;
+    background-color:rgb(211,211,211,0.75);
+    color:black;
+    font-size:14px;
+}
+
+.submit {
+    width: 80%;
+    height: 25px;
+    background-color: #2677B9;
+    font-size: 16px;
+    font-weight: 600px;
+    border: 1px solid transparent;
+    color:white;
+    border: none;
+    border-radius: 5px;
+}
+
+.submit:hover{
+    border: 1px solid #2677B9;
+    color: #2677B9;
+    background-color: white;
+    cursor: pointer;
+}
+
+.sendingContainer{
+    font-family: 'Oleo Script', cursive;
+    margin: 10px 0px 10px 25px;
+    width: 80%;
+    color: #2677B9;
+    padding: 0px 10px 0px 10px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.sending1 {
+    opacity: 0;
+    -webkit-animation: addDot 2s infinite;
+    -webkit-animation-delay: 0.0s;
+    animation: addDot 2s infinite;
+    animation-delay: 0.0s;
+}
+
+.sending2 {
+    opacity: 0;
+    -webkit-animation: addDot 2s infinite;
+    -webkit-animation-delay: 0.25s;
+      animation: addDot 2s infinite;
+      animation-delay: 0.25s;
+}
+
+.sending3 {
+    opacity: 0;
+    -webkit-animation: addDot 2s infinite;
+    -webkit-animation-delay: 0.35s;
+     animation: addDot 2s infinite;
+     animation-delay: 0.35s;
+}
+
+.radioBoxes input{
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 735px){
+    .messageGrid {
+        grid-template-columns: 100%;
+    }
+}
+
+@media screen and (max-width: 399px){
+    .header{
+        font-size:60px;
+    }
+
+    .intro{
+        font-size: .85rem;
+    }
+    .radioBoxes span::before{
+        content: "\A";
+        white-space: pre;
+    }
+}
+
+
+ 
+@-webkit-keyframes addDot {
+    0% { opacity: 0; }
+   50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes addDot {
+    0% { opacity: 0; }
+   50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@media screen and (max-width: 958px){
+    .messageForm{
+        height: 275px;
+    }
+}

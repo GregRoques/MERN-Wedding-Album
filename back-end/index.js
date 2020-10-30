@@ -6,6 +6,7 @@ const helmet = require("helmet");
 const logIn = require("./routes/TEST_routes/logIn_test"); //CURRENTLY TEST ROUTE
 const isLoggedIn = require("./routes/TEST_routes/isLoggedIn_test"); //CURRENTLY TEST ROUTE
 const photography = require("./routes/photography");
+const contact = require("./routes/personalData");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use("/login", logIn);
 app.use("/isloggedin", isLoggedIn);
 app.use("/photography", photography);
+app.use("/contact", contact);
 
 // app.use(express.static(path.join(__dirname, "public")));
 // app.get("/*", (req, res) => {

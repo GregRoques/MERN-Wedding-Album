@@ -70,7 +70,7 @@ class Login extends Component {
   render() {
     const { password, placeholder } = this.state;
     const { isLoaded } = this.props;
-    return isLoaded === "yes" ? (
+    return isLoaded === "no" ? (
       <div>
         <form onChange={this.onChangeHandler} onSubmit={(e) => this.onSubmitHanlder(e)}>
           <input

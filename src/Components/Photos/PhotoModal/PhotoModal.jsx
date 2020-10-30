@@ -24,7 +24,7 @@ const PhotoModal = props => {
             </div>
         </div>
         <div className ={ cssPhotoModal.pictureCounter }>
-            <a href={`/images/weddingAlbum/full/${download}`} download={`G+R_Wedding_${image + 1}.${download.split('.')[1]}`}><img src='/images/save_alt-24px.svg'/></a>
+            <a href={`/images/weddingAlbum/full/${download}`} download={`G+R_Wedding_${image + 1}.${download.split('.')[1]}`}><img src='/images/download.png'/></a>
         </div>
     </div>
     ) : ""
