@@ -87,10 +87,10 @@ class Contact extends Component {
             <form className={ cssMessage.messageGrid } onChange={ this.onChangeHandler } onSubmit={e => this.onSubmitHanlder(e)} >
                 <div>
                     <div className={ cssMessage.header }>
-                        Message
+                        Contact
                     </div>
                     <div className={ cssMessage.intro }>
-                        We'd love to hear from you! Send us a brief message using the form below.
+                        We'd love to hear from you! Say hi and/or send us your photos from our big day.
                     </div>
                     <input className={ cssMessage.shortForm } type="text" name="name" placeholder="Full Name" value={ this.state.name } required/> <br/>
                     <input className={ cssMessage.shortForm } type="email" name="email" placeholder="Email" value={ this.state.email } required/> <br/>
