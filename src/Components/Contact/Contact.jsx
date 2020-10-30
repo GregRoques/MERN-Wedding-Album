@@ -90,7 +90,7 @@ class Contact extends Component {
                         Message
                     </div>
                     <div className={ cssMessage.intro }>
-                        Send us a brief message and our staff will respond to you within two business days.
+                        We'd love to hear from you! Send us a brief message using the form below.
                     </div>
                     <input className={ cssMessage.shortForm } type="text" name="name" placeholder="Full Name" value={ this.state.name } required/> <br/>
                     <input className={ cssMessage.shortForm } type="email" name="email" placeholder="Email" value={ this.state.email } required/> <br/>
