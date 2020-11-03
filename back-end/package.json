@@ -11,16 +11,16 @@
   "dependencies": {
     "adm-zip": "^0.4.16",
     "bcrypt": "^5.0.0",
-    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "fs-extra": "^9.0.1",
     "helmet": "^4.1.1",
+    "jimp": "^0.16.1",
     "mysql2": "^2.2.5",
     "node-sass": "^4.14.1",
-    "rand-token": "^1.0.1",
-    "sharp": "^0.26.2"
+    "path": "^0.12.7",
+    "rand-token": "^1.0.1"
   }
 }

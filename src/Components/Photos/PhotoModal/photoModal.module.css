@@ -54,11 +54,13 @@
   text-align: right;
   text-decoration: none !important;
   color:white !important;
-  font-weight: 200;
-  font-size: 1rem;
   opacity:0;
   animation: in .25s 1s forwards;
   user-select: none;
+}
+
+.pictureCounter IMG{
+  width:2rem;
 }
 
 @keyframes in{

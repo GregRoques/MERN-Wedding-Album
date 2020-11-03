@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import cssMessage from "./CSS/contact.module.css";
+import cssMessage from "./contact.module.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { api } from "../../Dependencies/AxiosOrders";
+import Insta from "./Insta/Insta"
 
 class Contact extends Component {
     state = {
@@ -84,28 +85,31 @@ class Contact extends Component {
 
     render () {
         return (
-            <form className={ cssMessage.messageGrid } onChange={ this.onChangeHandler } onSubmit={e => this.onSubmitHanlder(e)} >
-                <div>
-                    <div className={ cssMessage.header }>
-                        Contact
+            <div>
+                <form className={ cssMessage.messageGrid } onChange={ this.onChangeHandler } onSubmit={e => this.onSubmitHanlder(e)} >
+                    <div>
+                        <div className={ cssMessage.header }>
+                            Contact
+                        </div>
+                        <div className={ cssMessage.intro }>
+                            We'd love to hear from you! Say hi and/or send us your photos from our big day.
+                        </div>
+                        <input className={ cssMessage.shortForm } type="text" name="name" placeholder="Full Name" value={ this.state.name } required/> <br/>
+                        <input className={ cssMessage.shortForm } type="email" name="email" placeholder="Email" value={ this.state.email } required/> <br/>
+                        <input className={ cssMessage.shortForm } type="tel" maxLength="14" name="phone" placeholder="Phone" value={ this.state.phone }/> <br/>
+                        { this.state.loading === true
+                            ? <div className={ cssMessage.sendingContainer }>
+                                Sending<span className={cssMessage.sending1}>.</span><span className={cssMessage.sending2}>.</span><span className={cssMessage.sending3}>.</span>
+                            </div> : <input className={ cssMessage.shortForm } type="text" maxLength="50" name="subject" placeholder="Subject" value={ this.state.subject}/>
+                        }
                     </div>
-                    <div className={ cssMessage.intro }>
-                        We'd love to hear from you! Say hi and/or send us your photos from our big day.
+                    <div>
+                        <textarea className={ cssMessage.messageForm} type="text" name="message" placeholder="Message" value={ this.state.message } required/>
+                        <button type="submit" className={ cssMessage.submit }>SUBMIT</button>
                     </div>
-                    <input className={ cssMessage.shortForm } type="text" name="name" placeholder="Full Name" value={ this.state.name } required/> <br/>
-                    <input className={ cssMessage.shortForm } type="email" name="email" placeholder="Email" value={ this.state.email } required/> <br/>
-                    <input className={ cssMessage.shortForm } type="tel" maxLength="14" name="phone" placeholder="Phone" value={ this.state.phone }/> <br/>
-                    { this.state.loading === true
-                        ? <div className={ cssMessage.sendingContainer }>
-                            Sending<span className={cssMessage.sending1}>.</span><span className={cssMessage.sending2}>.</span><span className={cssMessage.sending3}>.</span>
-                        </div> : <input className={ cssMessage.shortForm } type="text" maxLength="50" name="subject" placeholder="Subject" value={ this.state.subject}/>
-                    }
-                </div>
-                <div>
-                    <textarea className={ cssMessage.messageForm} type="text" name="message" placeholder="Message" value={ this.state.message } required/>
-                    <button type="submit" className={ cssMessage.submit }>SUBMIT</button>
-                </div>
-            </form>
+                </form>
+                <Insta/>
+            </div>
         );
     }
 };

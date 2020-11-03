@@ -13,7 +13,7 @@ class App extends Component {
   async componentDidMount() {
     const ip = await axios("https://extreme-ip-lookup.com/json/")
       .then((res) => {
-        return res.data;
+        return res.query;
       })
       .catch(() => {
         return "";
@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   NoPage = () => {
-    return <Redirect push to={!this.props.isLoggedIn ? "/login" : "/photos"} />;
+    return <Redirect push to={!this.props.isLoggedIn ? "/login" : "/video"} />;
   };
 
   render() {
@@ -37,8 +37,8 @@ class App extends Component {
         ) : (
           <Layout>
             <Switch>
-              <Route exact path="/photos" component={Photos} />
               <Route exact path="/video" component={Video} />
+              <Route exact path="/photos" component={Photos} />
               <Route exact path="/contact" component={Contact} />
               <Route component={this.NoPage} />
             </Switch>

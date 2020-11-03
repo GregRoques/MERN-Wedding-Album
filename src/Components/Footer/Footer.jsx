@@ -7,42 +7,6 @@ import cssFooter from "./footer.module.css";
 const Footer = (props) => {
   return (
     <div className={cssFooter.footer}>
-      <div className={cssFooter.gregInsta}>
-        <a
-          href="https://www.instagram.com/qtrmileatatime"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <img
-            src="/images/socialIcons/gregInsta1.png"
-            alt="Insta: @qtrmileatatime"
-          />
-          <img
-            className={cssFooter.gregInsta2}
-            src="/images/socialIcons/gregInsta2.png"
-            alt="Insta: @qtrmileatatime"
-          />
-        </a>
-      </div>
-      <div className={cssFooter.rebeccaInsta}>
-        <a
-          href="https://www.instagram.com/thegurv"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <img
-            src="/images/socialIcons/rebeccaInsta1.png"
-            alt="Insta: @thegurv"
-            // title="@thegurv"
-          />
-          <img
-            className={cssFooter.rebeccaInsta2}
-            src="/images/socialIcons/rebeccaInsta2.png"
-            // title="@thegurv"
-            alt="Insta: @thegurv"
-          />
-        </a>
-      </div>
       <div className={cssFooter.logOutButton} >
         <button onClick={() =>{return <Redirect to="/contact"/>}} className={cssFooter.button}>
           Contact

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const sharp = require("sharp");
+//const sharp = require("sharp");
 const { isAuthenticated } = require("../util/middleware/authenticator_test");
 const { readdirSync } = require("fs-extra");
 const AdmZip = require("adm-zip");
@@ -20,21 +20,21 @@ const zipPath = path.join(__dirname, `${folderContents}/zip`);
 
 // ====================================================================== Update Photo List
 
-const convertForWeb = (image, index, path) => {
-  const isMedOrThumbNail = path === "med" ? 1800 : 800;
+// const convertForWeb = (image, index, path) => {
+//   const isMedOrThumbNail = path === "med" ? 1800 : 800;
 
-  sharp(`${originalPath}/${image}`)
-    .resize(isMedOrThumbNail)
-    .jpeg({
-      quality: 100,
-      chromaSubsampling: "4:4:4",
-      force: true,
-    })
-    .toFile(`${webPath}/${path}_${index}.jpeg`)
-    .catch((err) => {
-      console.log(err);
-    });
-};
+//   sharp(`${originalPath}/${image}`)
+//     .resize(isMedOrThumbNail)
+//     .jpeg({
+//       quality: 100,
+//       chromaSubsampling: "4:4:4",
+//       force: true,
+//     })
+//     .toFile(`${webPath}/${path}_${index}.jpeg`)
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
 
 const updateList = () => {
   readdirSync(originalPath).forEach((image, i) => {
