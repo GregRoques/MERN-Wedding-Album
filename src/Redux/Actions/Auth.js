@@ -36,7 +36,11 @@ export const authCheckState = (ipAddress) => {
           //console.log(updateToken);
           if (updateToken.length > 10) {
             window.localStorage.setItem("GR-Wedding-Token", updateToken);
-            dispatch(logIn(updateToken));
+            dispatch(logIn({
+              password: updateToken,
+              browswer: browserName,
+              ip: ipAddress
+            }));
           } else {
             dispatch(logOut());
           }
