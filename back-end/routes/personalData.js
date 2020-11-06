@@ -28,7 +28,7 @@
 //     const sendDate = new Date().toISOString().slice(0, 10);
 
 //     transporter.sendMail({
-//         to: "jfeder44@gmail.com", //jason@nolabeds.com, 
+//         to: "greg.roques@gmail.com, rebecca.gurvich@gmail.com", 
 //         from: email,
 //         subject: `${subject}`,
 //         html: `<b>From:</b> ${name} <br/> 

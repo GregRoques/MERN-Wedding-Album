@@ -1,9 +1,9 @@
-// const express = require("express");
-// const router = express.Router();
-// const bcrypt = require("bcrypt");
-// const suid = require("rand-token").suid;
-// const { signInPW } = require("../util/password");
-// const db = require("../util/database");
+const express = require("express");
+const router = express.Router();
+const bcrypt = require("bcrypt");
+const suid = require("rand-token").suid;
+const { signInPW } = require('../util/passwords/loginPW_pw')
+const db = require("../util/database");
 
 router.post("/", (req, res, next) => {
   const { password, compId } = req.body;
@@ -18,8 +18,8 @@ router.post("/", (req, res, next) => {
           .then(() => {
             res.json(token, "");
           })
-          .catch(() => {
-            res.json("save-error");
+          .catch((err) => {
+            throw "save-error"
           });
       } else {
         res.json("save-error");
@@ -30,4 +30,4 @@ router.post("/", (req, res, next) => {
   });
 });
 
-// module.exports = router;
+module.exports = router;

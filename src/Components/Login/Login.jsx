@@ -53,12 +53,16 @@ class Login extends Component {
         const pw = res.data;
         console.log(pw)
         if (pw === "NO") {
-          isWrongPW();
+          return isWrongPW();
         } else {
           if(pw !== "save-error"){
             window.localStorage.setItem("GR-Wedding-Token", pw)
           };
-          LogIn(pw);
+          return LogIn({
+            password: pw,
+            browswer: browserName,
+            ip: ip
+          });
         }
       })
       .catch(() => {

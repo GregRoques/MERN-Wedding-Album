@@ -3,8 +3,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const helmet = require("helmet");
-const logIn = require("./routes/TEST_routes/logIn_test"); //CURRENTLY TEST ROUTE
-const isLoggedIn = require("./routes/TEST_routes/isLoggedIn_test"); //CURRENTLY TEST ROUTE
+const logIn = require("./routes/logIn");
+const isLoggedIn = require("./routes/isLoggedIn"); 
 const photography = require("./routes/photography");
 //const contact = require("./routes/personalData");
 

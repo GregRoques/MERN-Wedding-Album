@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 //const sharp = require("sharp");
-const { isAuthenticated } = require("../util/middleware/authenticator_test");
+const { isAuthenticated } = require("../util/middleware/authenticator");
 const { readdirSync } = require("fs-extra");
 const AdmZip = require("adm-zip");
 
