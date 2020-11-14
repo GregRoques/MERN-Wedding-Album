@@ -1,53 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import cssVideo from "./video.module.css";
-import { videoList } from "./videoList";
 
-class Video extends Component {
-  state = {
-    currVid: videoList.Feature_Video,
-  };
-
-  componentDidMount(){
-    window.scrollTo(0, 0);
-  }
-  
-  onChangeHandler = (e) => {
-    const { value } = e.target;
-
-    this.setState({
-      currVid: videoList[value],
-    });
-  };
-
-  render() {
-    const { onChangeHandler } = this;
-    const { currVid } = this.state;
+const Video = () => {
     return (
       <div>
-        <div className={cssVideo.selectBarContainer}>
-          <select
-            name="weddingVids"
-            className={cssVideo.selectBar}
-            onChange={onChangeHandler}
-          >
-            {Object.keys(videoList).map((vid, index) => {
-              return (
-                <option value={vid}>
-                  {index + 1}. {vid.replaceAll("_", " ")}
-                </option>
-              );
-            })}
-          </select>
-        </div>
         <div className={cssVideo.videoAlign}>
-          <iframe width="560" height="315" src={currVid} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLM2GdNHvfSCElP-c0kHDV6nYszw1mxfkm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div className={cssVideo.bookMarkLink}>
             <a href="https://www.youtube.com/playlist?list=PLM2GdNHvfSCElP-c0kHDV6nYszw1mxfkm" target="_blank">Bookmark YouTube Page</a>
         </div>
       </div>
     );
-  }
 }
 
 export default Video;
