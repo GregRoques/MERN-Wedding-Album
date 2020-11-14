@@ -7,22 +7,23 @@ const db = require("../util/database");
 
 router.post("/", (req, res, next) => {
   const { password, compId } = req.body;
-  const { ip, browserType } = compId;
+  const { ip, browserName } = compId;
 
   bcrypt.compare(password, signInPW, function (err, result) {
     if (result) {
       const token = suid(16);
-      if (ip && browserType) {
-        const insertQuery = `INSERT INTO currLoggedIn (ip, browser, token) VALUES ('${ip}', '${broswerType}', '${token}')`;
+      if (ip && browserName) {
+        const insertQuery = `INSERT INTO currLoggedIn (ip, browser, token) VALUES ('${ip}', '${browserName}', '${token}')`;
         db.execute(insertQuery)
           .then(() => {
-            res.json(token, "");
+            res.json(token);
           })
           .catch((err) => {
-            throw "save-error"
+            console.log(`LOG_IN: Did Not Save: ${err}`)
+            throw "NO"
           });
       } else {
-        res.json("save-error");
+        res.json("NO");
       }
     } else {
       res.json("NO");

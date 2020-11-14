@@ -74,11 +74,9 @@ router.post("/", isAuthenticated, (req, res, next) => {
     if (lengthStart === 0) {
       currResponse.albumLength = weddingAlbum.images.length;
     }
-    //console.log(currResponse);
+    console.log(currResponse);
     res.json(currResponse);
-  } else {
-    throw "Cannot Retrieve Photos at this time.";
-  }
+  } 
 });
 
 module.exports = router;

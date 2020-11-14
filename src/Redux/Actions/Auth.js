@@ -12,8 +12,11 @@ export const logIn = (token) => {
   };
 };
 
-export const logOut = () => {
+export const logOut = (token) => {
   window.localStorage.removeItem("GR-Wedding-Token");
+  axios.post(`${api}/logOut`, {
+    token
+  });
   return {
     type: AUTH_LOGOUT,
   };
@@ -22,18 +25,17 @@ export const logOut = () => {
 export const authCheckState = (ipAddress) => {
   return (dispatch) => {
     const token = window.localStorage.getItem("GR-Wedding-Token");
-    if (token && ipAddress !== "") {
+    if (token && ipAddress) {
       axios
         .post(`${api}/isloggedin`, {
-          token: token,
+          token,
           userId: {
             browserName,
             ipAddress,
           },
         })
         .then((res) => {
-          const updateToken = res.data;
-          //console.log(updateToken);
+          const { updateToken } = res.data;
           if (updateToken.length > 10) {
             window.localStorage.setItem("GR-Wedding-Token", updateToken);
             dispatch(logIn({
@@ -41,15 +43,8 @@ export const authCheckState = (ipAddress) => {
               browswer: browserName,
               ip: ipAddress
             }));
-          } else {
-            dispatch(logOut());
           }
         })
-        .catch(() => {
-          dispatch(logOut());
-        });
-    } else {
-      dispatch(logOut());
     }
   };
 };

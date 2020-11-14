@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
 import { logOut } from "../../Redux/Actions/Auth";
 import cssFooter from "./footer.module.css";
@@ -8,15 +8,23 @@ const Footer = (props) => {
   return (
     <div className={cssFooter.footer}>
       <div className={cssFooter.logOutButton} >
-        <button onClick={() =>{return <Redirect to="/contact"/>}} className={cssFooter.button}>
+      <Link to="/contact"> 
+        <button  className={cssFooter.button}>
           Contact
         </button>
-        <button onClick={() => props.LogOut()} className={cssFooter.button}>
+      </Link>
+        <button onClick={() => props.LogOut(props.isLoggedIn.password)} className={cssFooter.button}>
           Log Out
         </button>
       </div>
     </div>
   );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.auth.isLoggedIn,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -25,4 +33,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Footer);
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);

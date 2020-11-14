@@ -55,9 +55,7 @@ class Login extends Component {
         if (pw === "NO") {
           return isWrongPW();
         } else {
-          if(pw !== "save-error"){
-            window.localStorage.setItem("GR-Wedding-Token", pw)
-          };
+          window.localStorage.setItem("GR-Wedding-Token", pw)
           return LogIn({
             password: pw,
             browswer: browserName,
