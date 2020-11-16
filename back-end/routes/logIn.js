@@ -6,14 +6,13 @@ const { signInPW } = require('../util/passwords/loginPW_pw')
 const db = require("../util/database");
 
 router.post("/", (req, res, next) => {
-  const { password, compId } = req.body;
-  const { ip, browserName } = compId;
+  const { password, ip, browser } = req.body;
 
   bcrypt.compare(password, signInPW, function (err, result) {
     if (result) {
       const token = suid(16);
-      if (ip && browserName) {
-        const insertQuery = `INSERT INTO currLoggedIn (ip, browser, token) VALUES ('${ip}', '${browserName}', '${token}')`;
+      if (ip && browser) {
+        const insertQuery = `INSERT INTO currLoggedIn (ip, browser, token) VALUES ('${ip}', '${browser}', '${token}')`;
         db.execute(insertQuery)
           .then(() => {
             res.json(token);
