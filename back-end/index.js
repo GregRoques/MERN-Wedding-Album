@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const helmet = require("helmet");
 const logIn = require("./routes/logIn");
+const logOut = require("./routes/logOut");
 const isLoggedIn = require("./routes/isLoggedIn"); 
 const photography = require("./routes/photography");
 const contact = require("./routes/personalData");
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/login", logIn);
+app.use("/logout", logOut);
 app.use("/isloggedin", isLoggedIn);
 app.use("/photography", photography);
 app.use("/contact", contact);

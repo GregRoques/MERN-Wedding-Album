@@ -18,8 +18,8 @@ router.post("/", (req, res, next) => {
             res.json(token);
           })
           .catch((err) => {
-            console.log(`LOG_IN: Did Not Save: ${err}`)
-            throw "NO"
+            //console.log(`LOG_IN: Did Not Save: ${err}`)
+            res.json("NO");
           });
       } else {
         res.json("NO");

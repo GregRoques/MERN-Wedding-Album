@@ -6,14 +6,13 @@ import { authCheckState } from "./Redux/Actions/Auth";
 import Layout from "./Components/Layout/Layout";
 import Photos from "./Components/Photos/Photos";
 import Video from "./Components/Video/Video";
-import Contact from "./Components/Contact/Contact";
 import Login from "./Components/Login/Login";
 
 class App extends Component {
   async componentDidMount() {
     const ip = await axios("https://extreme-ip-lookup.com/json/")
       .then((res) => {
-        return res.query;
+        return res.data.query;
       })
       .catch(() => {
         return "";
@@ -39,7 +38,6 @@ class App extends Component {
             <Switch>
               <Route exact path="/video" component={Video} />
               <Route exact path="/photos" component={Photos} />
-              <Route exact path="/contact" component={Contact} />
               <Route component={this.NoPage} />
             </Switch>
           </Layout>

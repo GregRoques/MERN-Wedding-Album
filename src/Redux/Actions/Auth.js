@@ -14,38 +14,24 @@ export const logIn = (token) => {
 
 export const logOut = (info) => {
   window.localStorage.removeItem("GR-Wedding-Token");
-  axios.post(`${api}/logOut`, {
-    token
+  axios.post(`${api}/logout`, {
+    info
   });
-  if(info.password !== "NONE"){
-    return {
-      type: AUTH_LOGOUT,
-    };
-  }
+  return {
+    type: AUTH_LOGOUT
+  };
   
 };
 
-export const authCheckState = (ipAddress) => {
-  function isIpAndBrowserInDatabase(){
-    dispatch(logOut({
-      password: "NONE",
-      compId: {
-        browserName,
-        ip: ipAddress,
-      }
-    }))
-
-  }
+export const authCheckState = (ip) => {
   return (dispatch) => {
-    const token = window.localStorage.getItem("GR-Wedding-Token");
-    if (token && ipAddress) {
+    const password = window.localStorage.getItem("GR-Wedding-Token");
+    if (password && ip) {
       axios
         .post(`${api}/isloggedin`, {
           password,
-          userId: {
-            browserName,
-            ip: ipAddress,
-          },
+          browser: browserName,
+          ip
         })
         .then((res) => {
           const { updateToken } = res.data;
@@ -53,17 +39,23 @@ export const authCheckState = (ipAddress) => {
             window.localStorage.setItem("GR-Wedding-Token", updateToken);
             dispatch(logIn({
               password: updateToken,
-              compId: {
-                browserName,
-                ip: ipAddress,
-              }
+              browser: browserName,
+              ip
             }));
           }
         }).catch(()=>{
-          isIpAndBrowserInDatabase()
+          dispatch(logOut({
+            password: "",
+            browser: browserName,
+            ip
+          }))
         })
     } else {
-      isIpAndBrowserInDatabase()
+      dispatch(logOut({
+        password: "",
+        browser: browserName,
+        ip
+      }))
     }
   };
 };

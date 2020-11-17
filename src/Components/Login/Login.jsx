@@ -44,10 +44,8 @@ class Login extends Component {
     axios
       .post(`${api}/login`, {
         password,
-        compId: {
-          browserName,
-          ip
-        }
+        browser: browserName,
+        ip
       })
       .then((res) => {
         const pw = res.data;
@@ -58,7 +56,7 @@ class Login extends Component {
           window.localStorage.setItem("GR-Wedding-Token", pw)
           return LogIn({
             password: pw,
-            browswer: browserName,
+            browser: browserName,
             ip: ip
           });
         }
