@@ -10,9 +10,10 @@ router.post("/", (req, res, next) => {
 
   bcrypt.compare(password, signInPW, function (err, result) {
     if (result) {
+      const logInDate = new Date().getTime()
       const token = suid(16);
       if (ip && browser) {
-        const insertQuery = `INSERT INTO currLoggedIn (ip, browser, token) VALUES ('${ip}', '${browser}', '${token}')`;
+        const insertQuery = `INSERT INTO currLoggedIn (ip, browser, token, updated) VALUES ('${ip}', '${browser}', '${token}', '${logInDate}')`;
         db.execute(insertQuery)
           .then(() => {
             res.json(token);

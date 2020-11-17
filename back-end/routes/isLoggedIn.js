@@ -6,12 +6,13 @@ const db = require("../util/database");
 router.post("/", (req, res, next) => {
   const { password, browser, ip } = req.body;
   console.log(req.body)
-  const logInSearch = `SELECT token FROM currLoggedIn WHERE browser='${browser}' AND ip='${ip}'`;
+  const logInSearch = `SELECT id FROM currLoggedIn WHERE browser='${browser}' AND ip='${ip}' AND token='${password}'`;
   db.execute(logInSearch).then((res2) => {
     console.log(res2[0][0])
-    if (res2[0][0] === password) {
+      const id = res2[0][0];
       const newToken = suid(16);
-      const updateToken = `UPDATE currLoggedIn SET token='${newToken}' WHERE browser='${browser}' AND ip='${ip}'`;
+      const logInDate = new Date().getTime()
+      const updateToken = `UPDATE currLoggedIn SET token='${newToken}' AND updated='${logInDate}' WHERE id=${id}`;
       db.execute(updateToken)
         .then((res3) => {
           const { updatedToken } = res3[0][0];
@@ -20,9 +21,6 @@ router.post("/", (req, res, next) => {
         .catch(() => {
           res.json("");
         });
-    } else {
-      res.json("");
-    }
   });
 });
 

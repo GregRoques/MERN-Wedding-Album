@@ -8,7 +8,12 @@ const Footer = (props) => {
   return (
     <div className={cssFooter.footer}>
       <div className={cssFooter.logOutButton} >
-        <button onClick={() => props.LogOut(props.isLoggedIn)} className={cssFooter.button}>
+      <Link to="/contact"> 
+        <button  className={cssFooter.button}>
+          Contact
+        </button>
+      </Link>
+        <button onClick={() => props.LogOut(props.isLoggedIn.password)} className={cssFooter.button}>
           Log Out
         </button>
       </div>
@@ -24,7 +29,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    LogOut: (props) => dispatch(logOut(props))
+    LogOut: () => dispatch(logOut())
   };
 };
 

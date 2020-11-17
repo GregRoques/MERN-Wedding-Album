@@ -1,0 +1,33 @@
+.instaBody{
+    width: 100%;
+    text-align: center;
+}
+
+.gregInsta,
+.rebeccaInsta {
+    height: 60px;
+    width: 60px;
+    position: relative;
+    display: inline-block;
+    margin: 0rem 1rem;
+}
+
+.gregInsta IMG,
+.rebeccaInsta IMG {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .35s;
+}
+
+.gregInsta2:hover,
+.rebeccaInsta2:hover {
+    opacity: 0;
+}
+
+.gregInsta2,
+.rebeccaInsta2 {
+    opacity: 1;
+}
