@@ -8,7 +8,6 @@ const isAuthenticated = (req, res, next) => {
     .then((res) => {
       console.log(res[0][0])
       const { ip, browser } = res[0][0];
-      console.log(browser)
       if (ip === loginCheck.ip && browser === loginCheck.browser) {
         next();
       } else {

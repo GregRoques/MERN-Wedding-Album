@@ -8,19 +8,22 @@ router.post("/", (req, res, next) => {
   console.log(req.body)
   const logInSearch = `SELECT id FROM currLoggedIn WHERE browser='${browser}' AND ip='${ip}' AND token='${password}'`;
   db.execute(logInSearch).then((res2) => {
-    console.log(res2[0][0])
-      const id = res2[0][0];
+    console.log(res2[0][0].id)
+      const id = res2[0][0].id;
       const newToken = suid(16);
       const logInDate = new Date().getTime()
-      const updateToken = `UPDATE currLoggedIn SET token='${newToken}' AND updated='${logInDate}' WHERE id=${id}`;
-      db.execute(updateToken)
-        .then((res3) => {
-          const { updatedToken } = res3[0][0];
-          res.json(updatedToken);
-        })
-        .catch(() => {
-          res.json("");
-        });
+      // const updateToken = `UPDATE currLoggedIn SET token='${newToken}', updated='${logInDate}' WHERE id='${id}'`;
+      // db.execute(updateToken)
+      //   .then((res3) => {
+      //     const updatedToken = res3[0][0].token;
+      //     console.log(updateToken)
+      //     res.json(updatedToken);
+      //   })
+      //   .catch((err) => {
+      //     throw err
+      //   });
+  }).catch((err) => {
+    throw err
   });
 });
 

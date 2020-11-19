@@ -13,6 +13,7 @@ export const logIn = (token) => {
 };
 
 export const logOut = (info) => {
+  console.log(info)
   window.localStorage.removeItem("GR-Wedding-Token");
   axios.post(`${api}/logout`, {
     info
