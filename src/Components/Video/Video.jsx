@@ -7,6 +7,7 @@ import cssVideo from "./video.module.css";
 
 class Video extends Component {
   state = {
+    isDisplay: "yes",
     playlistId: "",
     videoLinks: "",
     currVid: ""
@@ -22,7 +23,12 @@ class Video extends Component {
       this.setState({
         playlistId: playlistLinkId,
         videoLinks: videoLinks,
-        currVid: videoLinks[0].link
+        currVid: videoLinks[0].link,
+        isDisplay: "yes"
+      })
+    }).catch(()=>{
+      this.setState({
+        isDisplay: "no"
       })
     })
   }
@@ -38,9 +44,9 @@ class Video extends Component {
 
   render() {
     const { onChangeHandler } = this;
-    const { playlistId, videoLinks, currVid } = this.state;
+    const { playlistId, videoLinks, currVid, isDisplay } = this.state;
     console.log(currVid)
-    return (
+    return isDisplay === "yes" ? (
       <div>
         <div className={cssVideo.selectBarContainer}>
           <select
@@ -64,7 +70,10 @@ class Video extends Component {
             <a href={`https://www.youtube.com/playlist?list=${playlistId}`} target="_blank">Bookmark YouTube Page</a>
         </div>
       </div>
-    );
+    ) : <div className={cssVideo.isError}>
+            <img src="/images/ytFail.jpg"/>
+            <div>Sorry, YouTube Cannot Load Your Videos at This Time :(</div>
+        </div>
   }
 }
 

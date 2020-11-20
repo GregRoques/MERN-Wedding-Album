@@ -35,7 +35,8 @@ export const authCheckState = (ip) => {
           ip
         })
         .then((res) => {
-          const { updateToken } = res.data;
+          const updateToken = res.data;
+          console.log(res.data)
           if (updateToken.length > 10) {
             window.localStorage.setItem("GR-Wedding-Token", updateToken);
             dispatch(logIn({

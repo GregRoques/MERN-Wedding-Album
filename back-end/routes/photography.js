@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-//const sharp = require("sharp");
+const Jimp = require("jimp");
 const { isAuthenticated } = require("../util/middleware/authenticator");
 const { readdirSync } = require("fs-extra");
 const AdmZip = require("adm-zip");
@@ -16,44 +16,51 @@ const folderContents = "../../public/images/weddingAlbum";
 
 const originalPath = path.join(__dirname, `${folderContents}/full`);
 const webPath = path.join(__dirname, `${folderContents}/web`);
+
 const zipPath = path.join(__dirname, `${folderContents}/zip`);
 
 // ====================================================================== Update Photo List
 
-// const convertForWeb = (image, index, path) => {
-//   const isMedOrThumbNail = path === "med" ? 1800 : 800;
-
-//   sharp(`${originalPath}/${image}`)
-//     .resize(isMedOrThumbNail)
-//     .jpeg({
-//       quality: 100,
-//       chromaSubsampling: "4:4:4",
-//       force: true,
-//     })
-//     .toFile(`${webPath}/${path}_${index}.jpeg`)
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
-
-const updateList = () => {
-  readdirSync(originalPath).forEach((image, i) => {
-    if (
-      image.toLocaleLowerCase().includes(".png") ||
-      image.toLocaleLowerCase().includes(".jpg") ||
-      image.toLocaleLowerCase().includes(".jpeg")
-    ) {
-      weddingAlbum.images.push(image);
-      // convertForWeb(image, i, "med");
-      // convertForWeb(image, i, "tb");
-    }
+const convertForWeb = (image, path) => {
+  const isMedOrThumbNail = path === "med" ? 1800 : 800;
+  Jimp.read(`${originalPath}/${image}`).then(Gregvich=>{
+    return Gregvich
+      .resize(isMedOrThumbNail, Jimp.AUTO)
+      .quality(100)
+      .write(`${webPath}/${path}_${image}`)
+  }).catch((err) => {
+    console.log(err);
   });
-  // const file = new AdmZip();
-  // file.addLocalFolder(originalPath);
-  // file.writeZip(`${zipPath}/G+R_WeddingAlbumFull.zip`);
 };
 
-updateList();
+const updateList = () => {
+  readdirSync(originalPath).forEach((image) => {
+    if (
+      (image.toLocaleLowerCase().includes(".png") ||
+      image.toLocaleLowerCase().includes(".jpg") ||
+      image.toLocaleLowerCase().includes(".jpeg")) &&
+      (!webPath.includes(`tb_${image}`) && !webPath.includes(`med_${image}`))
+    ) {
+      weddingAlbum.images.push(image);
+      convertForWeb(image, "med");
+      convertForWeb(image, "tb");
+    }
+  });
+  const file = new AdmZip();
+  file.addLocalFolder(originalPath);
+  file.writeZip(`${zipPath}/G+R_WeddingAlbumFull.zip`);
+};
+
+setTimeout(()=>{
+  const originalLength = readdirSync(originalPath).length;
+  const webLength = readdirSync(webPath).length;
+  // console.log(originalLength)
+  // console.log(webLength)
+  if (weddingAlbum.images === [] || originalLength * 2 !== webLength) {
+    updateList();
+  }
+}, 5000)
+
 
 setInterval(() => {
   const originalLength = readdirSync(originalPath).length;
@@ -79,3 +86,4 @@ router.post("/", isAuthenticated, (req, res, next) => {
 });
 
 module.exports = router;
+

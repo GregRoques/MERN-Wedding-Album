@@ -3,7 +3,6 @@ import cssMessage from "./contact.module.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { api } from "../../Dependencies/AxiosOrders";
-import Insta from "./Insta/Insta"
 
 class Contact extends Component {
     state = {
@@ -112,7 +111,6 @@ class Contact extends Component {
                         <button type="submit" className={ cssMessage.submit }>SUBMIT</button>
                     </div>
                 </form>
-                <Insta/>
             </div>
         );
     }

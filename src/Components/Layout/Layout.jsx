@@ -8,7 +8,7 @@ import hoc from "./HOC";
 
 class Home extends Component {
   state = {
-    selected: "video",
+    selected: "photos",
   };
 
   componentDidMount(){

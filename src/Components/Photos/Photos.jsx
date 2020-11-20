@@ -79,7 +79,6 @@ class Photos extends Component {
                     nextDirection = { this.nextPrevImage }
                     stopAutoDownload  ={ this.preventImageTheft }
                     closeModal = { this.setDisplay }
-                    download ={images[modalPhoto]}
                     totalLength = { images.length -1 }
                 />
                 <div className={cssPhotos.imageGalleryContainer}>
@@ -99,7 +98,7 @@ class Photos extends Component {
                             {loaded
                             ? images.map((image, i) => (
                                 <div className={cssPhotos.imageItem}>
-                                    <img onClick={() => this.setDisplay(true, i) } onDragStart={e=> this.preventImageTheft(e)} onContextMenu={e=> this.preventImageTheft(e)} key={ i + 1} name={image} alt={ `G+R_Wedding${i + 1}` } src={`/images/weddingAlbum/web/tb_${i}.jpeg`}/>
+                                    <img onClick={() => this.setDisplay(true, image) } onDragStart={e=> this.preventImageTheft(e)} onContextMenu={e=> this.preventImageTheft(e)} key={ i + 1} name={image} alt={ `G+R_Wedding${i + 1}` } src={`/images/weddingAlbum/web/tb_${image}`}/>
                                 </div>
                                 ))
                             : ""}

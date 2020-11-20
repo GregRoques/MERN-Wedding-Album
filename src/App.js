@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   NoPage = () => {
-    return <Redirect push to={!this.props.isLoggedIn ? "/login" : "/video"} />;
+    return <Redirect push to={!this.props.isLoggedIn ? "/login" : "/photos"} />;
   };
 
   render() {
@@ -37,8 +37,8 @@ class App extends Component {
         ) : (
           <Layout>
             <Switch>
-              <Route exact path="/video" component={Video} />
               <Route exact path="/photos" component={Photos} />
+              <Route exact path="/video" component={Video} />
               <Route exact path="/contact" component={Contact} />
               <Route component={this.NoPage} />
             </Switch>
