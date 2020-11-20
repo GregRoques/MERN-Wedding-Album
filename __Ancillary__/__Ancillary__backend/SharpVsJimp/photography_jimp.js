@@ -2,9 +2,13 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const { isAuthenticated } = require("../util/middleware/authenticator");
-const sharp = require("sharp");
+const Jimp = require("jimp");
 const { readdirSync, unlink } = require("fs-extra");
 const AdmZip = require("adm-zip");
+
+let weddingAlbum = {
+  images: [],
+};
 
 // ====================================================================== Links
 
@@ -17,12 +21,6 @@ const webPath = path.join(__dirname, `${folderContents}/web`);
 const webContents = readdirSync(webPath);
 
 const zipPath = path.join(__dirname, `${folderContents}/zip`);
-
-// ====================================================================== Wedding Album Object for Query Response
-
-let weddingAlbum = {
-  images: originalContents,
-};
 
 // ====================================================================== Update Photo List
 
@@ -41,14 +39,12 @@ const deleteOriginal = (image) => {
 const convertForWeb = (image, path) => {
   const isMedOrThumbNail = path === "med" ? 1800 : 800;
 
-  sharp(`${originalPath}/${image}`)
-    .resize(isMedOrThumbNail)
-    .jpeg({
-      quality: 100,
-      chromaSubsampling: "4:4:4",
-      force: true,
+  Jimp.read(`${originalPath}/${image}`)
+    .then((Gregvich) => {
+      return Gregvich.resize(isMedOrThumbNail, Jimp.AUTO)
+        .quality(100)
+        .write(`${webPath}/${path}_${image}`);
     })
-    .toFile(`${webPath}/${path}_${image}`)
     .catch((err) => {
       const errMessage = `IMAGE WRITING FAILED (convertForWeb): ${err}`;
       console.log(errMessage);

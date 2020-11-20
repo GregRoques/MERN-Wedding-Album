@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
-const myKey = require("../util/passwords/sendgridApi_pw");
+const myKey = require("../util/passwords/sendgridApi");
 const { isAuthenticated } = require("../util/middleware/authenticator");
 
 const transporter = nodemailer.createTransport(sendgridTransport({

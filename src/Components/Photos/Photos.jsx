@@ -53,10 +53,10 @@ class Photos extends Component {
 
     // ============================= pop-up Modal Methods
 
-    setDisplay = (show, image) => {
+    setDisplay = (show, i) => {
         this.setState({
             modalShow: show,
-            modalPhoto: image
+            modalPhoto: i
         })
     }
 
@@ -74,7 +74,8 @@ class Photos extends Component {
         return this.state.error === "NONE" ? (
             <div className={cssPhotos.fadeIn}>
                 <PhotoModal
-                    image={ modalPhoto }
+                    image={ images[modalPhoto] }
+                    imageIndex ={modalPhoto}
                     isShown = { modalShow }
                     nextDirection = { this.nextPrevImage }
                     stopAutoDownload  ={ this.preventImageTheft }
@@ -98,7 +99,7 @@ class Photos extends Component {
                             {loaded
                             ? images.map((image, i) => (
                                 <div className={cssPhotos.imageItem}>
-                                    <img onClick={() => this.setDisplay(true, image) } onDragStart={e=> this.preventImageTheft(e)} onContextMenu={e=> this.preventImageTheft(e)} key={ i + 1} name={image} alt={ `G+R_Wedding${i + 1}` } src={`/images/weddingAlbum/web/tb_${image}`}/>
+                                    <img onClick={() => this.setDisplay(true, i) } onDragStart={e=> this.preventImageTheft(e)} onContextMenu={e=> this.preventImageTheft(e)} key={ i + 1} name={image} alt={ `G+R_Wedding${i + 1}` } src={`/images/weddingAlbum/web/tb_${image}`}/>
                                 </div>
                                 ))
                             : ""}
