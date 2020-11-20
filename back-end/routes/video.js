@@ -32,7 +32,26 @@ const getVids = () => {
     })
     .catch((err) => {
       console.log(err)
-      throw err;
+      // throw err;
+      // You will not want to include below in your app. As this youtube channel is on my station and these are the initial videos, I know as long as the above playlist id exists so will these videos.
+      videoList.videoLinks = [
+          { 
+              title: "Feature", 
+              link:"https://www.youtube.com/embed/Sq8uC9pEd_0"
+          },
+          {
+              title: "Full",
+              link: "https://www.youtube.com/embed/wmxQ7R4ZYgE",
+          },
+          {
+              title: "Chris Stuckey Live 1",
+              link: "https://www.youtube.com/embed/sI14foi9ySg",
+          },
+          {
+              title: "Chris Stuckey Live 2",
+              link: "https://www.youtube.com/embed/mTJ5xb-Bkpo",
+          }
+      ]
     });
 };
 
