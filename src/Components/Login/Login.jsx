@@ -72,6 +72,7 @@ class Login extends Component {
     const { isLoaded } = this.props;
     return isLoaded === "yes" ? (
       <div>
+        <img src="/images/socialLink.jpg" class={cssLogin.imageBackground}/>
         <form onChange={this.onChangeHandler} onSubmit={(e) => this.onSubmitHanlder(e)}>
           <input
             className={cssLogin.shortForm}
