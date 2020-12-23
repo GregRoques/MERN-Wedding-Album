@@ -43,6 +43,7 @@ setInterval(() => {
 }, 90000000); // updates every 25 hours...one hour apart from photo check;
 
 router.post("/", isAuthenticated, (req, res, next) => {
+  console.log(videoList)
   res.json(videoList);
 });
 

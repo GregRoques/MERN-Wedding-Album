@@ -119,6 +119,7 @@ router.post("/", isAuthenticated, (req, res, next) => {
     if (lengthStart === 0) {
       currResponse.albumLength = weddingAlbum.images.length;
     }
+    console.log(currResponse)
     res.json(currResponse);
   }
 });

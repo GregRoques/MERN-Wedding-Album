@@ -8,7 +8,7 @@ router.post("/", (req, res, next) => {
   console.log(req.body)
   const logInSearch = `SELECT id, token FROM currLoggedIn WHERE browser='${browser}' AND ip='${ip}' AND token='${password}'`;
   db.execute(logInSearch).then((res2) => {
-    console.log(res2[0][0].token)
+    // console.log(res2[0][0].token)
     console.log(password)
       const id = res2[0][0].id;
       const newToken = suid(16);

@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import cssLayout from "./layout.module.css";
 import Footer from "../Footer/Footer";
-import Video from "../Video/Video";
-import Photos from "../Photos/Photos";
-import hoc from "./HOC";
 
 class Home extends Component {
   state = {
