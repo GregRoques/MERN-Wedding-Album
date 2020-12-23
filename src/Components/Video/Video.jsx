@@ -19,11 +19,10 @@ class Video extends Component {
     axios.post(`${api}/video`, {
       loginCheck: this.props.isLoggedIn
     }).then(res => {
-      const {playlistLinkId, videoLinks} = res.data;
+      const videoList = res.data;
       this.setState({
-        playlistId: playlistLinkId,
-        videoLinks: videoLinks,
-        currVid: videoLinks[0].link,
+        videoLinks: videoList,
+        currVid: videoList[0].link,
         isDisplay: "yes"
       })
     }).catch(()=>{
@@ -67,7 +66,7 @@ class Video extends Component {
           <iframe width="560" height="315" src={currVid} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div className={cssVideo.bookMarkLink}>
-            <a href={`https://www.youtube.com/playlist?list=${playlistId}`} target="_blank">Bookmark YouTube Page</a>
+            <a href="https://www.youtube.com/playlist?list=PLM2GdNHvfSCElP-c0kHDV6nYszw1mxfkm" target="_blank">Bookmark YouTube Page</a>
         </div>
       </div>
     ) : <div className={cssVideo.isError}>

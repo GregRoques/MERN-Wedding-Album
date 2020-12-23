@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import cssMessage from "./contact.module.css";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { api } from "../../Dependencies/AxiosOrders";
+import { api } from "../../../src/Dependencies/AxiosOrders";
 
 class Contact extends Component {
     state = {

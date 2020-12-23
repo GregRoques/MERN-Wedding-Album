@@ -7,7 +7,6 @@ import Layout from "./Components/Layout/Layout";
 import Photos from "./Components/Photos/Photos";
 import Video from "./Components/Video/Video";
 import Login from "./Components/Login/Login";
-import Contact from './Components/Contact/Contact';
 
 class App extends Component {
   async componentDidMount() {
@@ -39,7 +38,6 @@ class App extends Component {
             <Switch>
               <Route exact path="/photos" component={Photos} />
               <Route exact path="/video" component={Video} />
-              <Route exact path="/contact" component={Contact} />
               <Route component={this.NoPage} />
             </Switch>
           </Layout>

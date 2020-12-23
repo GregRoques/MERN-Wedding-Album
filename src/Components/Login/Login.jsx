@@ -70,6 +70,7 @@ class Login extends Component {
   render() {
     const { password, placeholder } = this.state;
     const { isLoaded } = this.props;
+    console.log('PASSWORD: sheriffCallie')
     return isLoaded === "yes" ? (
       <div>
         <img src="/images/socialLink.jpg" class={cssLogin.imageBackground}/>
