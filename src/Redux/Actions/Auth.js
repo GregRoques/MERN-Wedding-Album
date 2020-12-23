@@ -13,7 +13,6 @@ export const logIn = (token) => {
 };
 
 export const logOut = (info) => {
-  console.log(info)
   window.localStorage.removeItem("GR-Wedding-Token");
   axios.post(`${api}/logout`, {
     info
@@ -36,7 +35,6 @@ export const authCheckState = (ip) => {
         })
         .then((res) => {
           const updateToken = res.data;
-          console.log(res.data)
           if (updateToken.length > 10) {
             window.localStorage.setItem("GR-Wedding-Token", updateToken);
             dispatch(logIn({

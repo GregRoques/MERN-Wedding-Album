@@ -34,7 +34,6 @@ class Video extends Component {
   
   onChangeHandler = (e) => {
     const { value } = e.target;
-    console.log(value)
     const { videoLinks } = this.state
     this.setState({
       currVid: videoLinks[value].link,
@@ -43,8 +42,7 @@ class Video extends Component {
 
   render() {
     const { onChangeHandler } = this;
-    const { playlistId, videoLinks, currVid, isDisplay } = this.state;
-    console.log(currVid)
+    const { videoLinks, currVid, isDisplay } = this.state;
     return isDisplay === "yes" ? (
       <div>
         <div className={cssVideo.selectBarContainer}>

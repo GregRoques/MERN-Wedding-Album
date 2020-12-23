@@ -9,7 +9,7 @@ import { logIn } from "../../Redux/Actions/Auth";
 class Login extends Component {
   state = {
     password: "",
-    placeholder: "Password",
+    placeholder: "Password (check console)",
     ip:""
   };
 
@@ -49,7 +49,6 @@ class Login extends Component {
       })
       .then((res) => {
         const pw = res.data;
-        console.log(pw)
         if (pw === "NO") {
           return isWrongPW();
         } else {
@@ -84,7 +83,7 @@ class Login extends Component {
           />
           <div className={cssLogin.buttonContainer}>
             <button type="submit" className={cssLogin.button}>
-              {placeholder === "Password" ? "SUBMIT" : "Try Again?"}
+              {placeholder === "Password (check console)" ? "SUBMIT" : "Try Again?"}
             </button>
           </div>
         </form>

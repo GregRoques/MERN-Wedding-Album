@@ -5,7 +5,6 @@ import { logOut } from "../../Redux/Actions/Auth";
 import cssFooter from "./footer.module.css";
 
 const Footer = (props) => {
-  console.log(props.isLoggedIn)
   return (
     <div className={cssFooter.footer}>
       <div className={cssFooter.logOutButton} >
