@@ -127,6 +127,15 @@ router.post("/", (req, res, next) => {
   });
 });
 ```
+# Git Ignore Folders
+
+## Backend–util_passwords
+ - **db_pw.js:** contains "databaseName" and "databasePassword" strings.
+ - **loginPW_pw.js:** contains "signInPW" bcrypt-password string
+
+ ## Frontend–Dependencies
+ - **AxiosOrders:** contains "api" backend connection string
+
 # Website Video Walkthrough
 
 [![Instagram Widget demo video](./public/ReadMeImages/urlshredder1.png)](https://youtu.be/K-TWTt9kAvs)
