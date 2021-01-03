@@ -14,9 +14,9 @@ RewriteRule . /index.html [L]
 ================= HTTP
 
 <VirtualHost *:80>
-  DocumentRoot /var/www/[PATH_TO_FOLDER_WITH_BUILD_FILE]
-    ServerName gregvich.com
-    <Directory "/var/www/[PATH_TO_FOLDER_WITH_BUILD_FILE]">
+  DocumentRoot /var/www/MERN-Wedding-Album/back-end/build
+    ServerName gregvich.gregroques.com
+    <Directory "/var/www/MERN-Wedding-Album/back-end/build">
         allow from all
         AllowOverride All
         Order allow,deny
