@@ -32,7 +32,7 @@ class Photos extends Component {
     // ============================= Backend Photo Request
 
     getPhotos = (start) => {
-        axios.post(`${api}/photography`, {
+        axios.post(`${api}/backendPhoto`, {
             lengthStart: start,
             loginCheck: this.props.isLoggedIn
         })

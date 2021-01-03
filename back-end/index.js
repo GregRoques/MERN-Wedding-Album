@@ -20,13 +20,8 @@ app.use(bodyParser.json());
 app.use("/login", logIn);
 app.use("/logout", logOut);
 app.use("/isloggedin", isLoggedIn);
-app.use("/photography", photography);
-app.use("/video", video)
-
-// app.use(express.static(path.join(__dirname, "public")));
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "public", "index.html"));
-// });
+app.use("/backendPhoto", photography);
+app.use("/backendVideo", video)
 
 const PORT = 2000;
 app.listen(PORT, () => {

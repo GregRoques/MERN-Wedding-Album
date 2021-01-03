@@ -16,7 +16,7 @@ class Video extends Component {
   componentDidMount(){
     window.scrollTo(0, 0);
 
-    axios.post(`${api}/video`, {
+    axios.post(`${api}/backendVideo`, {
       loginCheck: this.props.isLoggedIn
     }).then(res => {
       const videoList = res.data;
