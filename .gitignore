@@ -7,7 +7,7 @@
 /back-end/package-lock.json
 /front-end/package-lock.json
 /front-end/public/images/weddingAlbum
-/src/Dependencies/AxiosOrders.js
+/front-end/src/Dependencies/AxiosOrders.js
 /.pnp
 .pnp.js
 
