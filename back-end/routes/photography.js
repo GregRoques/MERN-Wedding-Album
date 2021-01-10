@@ -9,6 +9,7 @@ const AdmZip = require("adm-zip");
 // ====================================================================== Links
 
 const folderContents = "../../public/images/weddingAlbum";
+// const folderContents = "../build/front-end/public/images/weddingAlbum"
 
 const originalPath = path.join(__dirname, `${folderContents}/full`);
 const originalContents = readdirSync(originalPath);

@@ -31,6 +31,8 @@ Site allowing family and friends to see photos and videos from our wedding.
 - npm i react-router-dom
 - npm i react-html-parser
 - npm i axios
+- npm i Zip-Saver
+- npm i react-infinite-scroll-component
 
 **Get User Info:**
 
@@ -84,6 +86,9 @@ In the absence of TypeScript, this will remove all comments during build. Once i
 - npm i cors
 - npm i rand-token
 - npm i bcrypt
+- npm i adm-zip
+- npm i sharp
+- npm i fs-extra
 
 ### Using rand-token and bcrypt
 
@@ -136,6 +141,12 @@ router.post("/", (req, res, next) => {
  ## Frontend–Dependencies
  - **AxiosOrders:** contains "api" backend connection string
 
+ ## Frontend–public/images/weddingAlbum
+ **Folders:**
+ - full: original photos uploaded via FileZilla to server
+ - web: auto-generated thumbnail and medium size images
+ - zip: auto-generated zip-file of all original photos
+
 # Website Video Walkthrough
 
-[![Instagram Widget demo video](./public/ReadMeImages/urlshredder1.png)](https://youtu.be/K-TWTt9kAvs)
+[![Instagram Widget demo video](./front-end/public/ReadMeImages/urlshredder1.png)](https://youtu.be/nng-GhXo3Ww)

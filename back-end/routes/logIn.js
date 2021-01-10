@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
+//const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const suid = require("rand-token").suid;
 const { signInPW } = require('../util/passwords/loginPW_pw')
 const db = require("../util/database");

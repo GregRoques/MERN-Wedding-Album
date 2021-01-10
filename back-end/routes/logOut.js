@@ -5,6 +5,11 @@ const db = require("../util/database");
 setInterval(function(){
   const compareDate = (new Date().getTime()) - 7776000000; // current date - three months in milliseconds
   const deleteUnused = `DELETE FROM currLoggedIn WHERE updated < '${compareDate}'`
+  db.execute(deleteUnused).then((req,res,next)=>{
+    console.log('succesffully deleted all unused accounts')
+  }).catch(err=>{
+    console.log(`Could Not Delete Unused Accounts: Error: ${err}`)
+  })
 },1209600000); // every two weeks, delete all rows that have not been updated in greater than 3 months.
 
 router.post("/", (req, res, next) => {
