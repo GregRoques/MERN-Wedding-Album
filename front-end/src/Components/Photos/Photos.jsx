@@ -15,6 +15,7 @@ class Photos extends Component {
         modalShow: false,
         modalPhoto: null,
         loaded:false,
+        degrees: 0,
         error: "NONE",
     }
 
@@ -22,6 +23,15 @@ class Photos extends Component {
         window.scrollTo(0, 0);
         this.getPhotos(0);
     }
+
+    rotate = () => {
+        const { degrees } = this.state;
+        const rotation = degrees === 270 ? 0 : degrees + 90
+        this.setState({
+            degrees: rotation
+        })
+    }
+
 
     // ============================= Image Drag and Context Menu Methods
 
@@ -56,20 +66,22 @@ class Photos extends Component {
     setDisplay = (show, i) => {
         this.setState({
             modalShow: show,
-            modalPhoto: i
+            modalPhoto: i,
+            degrees: 0
         })
     }
 
     nextPrevImage= (i) => {
         this.setState({
-            modalPhoto: i
+            modalPhoto: i,
+            degrees:0
         })
     }
 
     // ============================= Render Block
 
     render() {
-        const {images, albumLength, loaded, error, modalPhoto, modalShow} = this.state;
+        const {images, albumLength, loaded, error, modalPhoto, modalShow, degrees} = this.state;
         
         return this.state.error === "NONE" ? (
             <div className={cssPhotos.fadeIn}>
@@ -81,6 +93,8 @@ class Photos extends Component {
                     stopAutoDownload  ={ this.preventImageTheft }
                     closeModal = { this.setDisplay }
                     totalLength = { images.length -1 }
+                    degrees = {degrees}
+                    rotate = {this.rotate}
                 />
                 <div className={cssPhotos.imageGalleryContainer}>
                     <InfiniteScroll
