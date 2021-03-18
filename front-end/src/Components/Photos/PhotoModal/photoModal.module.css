@@ -7,7 +7,7 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 8;
-    margin-top: 55px;
+    margin-top: 50px;
     margin-bottom: 0px;
     animation-name: up;
     animation-duration:1s;
@@ -27,15 +27,16 @@
   position: absolute;
   display:flex;
   flex-direction: row;
-  /* left: 50%;
-  transform: translate(-50%); */
+
   width: 100%;
   height:100%
 }
 
 .sliderContainer{
-  width:inherit;;
-  height: 97.25%;
+  display: inline-block;
+  position: relative;
+  width:inherit;
+  height: inherit;
 }
 
 .sliderContainer IMG {
@@ -46,6 +47,21 @@
 
 
 .pictureCounter a{
+  position: fixed;
+  z-index:98;
+  margin-top:1rem;
+  right:2rem;
+  bottom: 1rem;
+  fill: white;
+  text-align: right;
+  text-decoration: none !important;
+  color:white !important;
+  opacity:0;
+  animation: in .25s 1s forwards;
+  user-select: none;
+}
+
+.rotate {
   position: fixed;
   z-index:98;
   margin-top:1rem;
