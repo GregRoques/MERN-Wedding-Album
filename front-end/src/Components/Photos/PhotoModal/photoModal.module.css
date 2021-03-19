@@ -90,6 +90,10 @@
   width:2rem;
 }
 
+.rotate IMG{
+  width:2rem;
+}
+
 @keyframes in{
   0%{
       opacity: 0
