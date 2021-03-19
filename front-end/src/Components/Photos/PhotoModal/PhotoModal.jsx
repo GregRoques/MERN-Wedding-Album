@@ -31,8 +31,7 @@ const PhotoModal = props => {
             <a href={`/images/weddingAlbum/full/${image}`} download={image}> <img src='/images/download.png'/></a>
         </div>
         <div className ={ cssPhotoModal.rotate } onClick={()=>rotate()}>
-
-                R
+            <img src='/images/rotate.png'/>
         </div>
     </div>
     ) : ""}
